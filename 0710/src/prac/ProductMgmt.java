@@ -9,7 +9,7 @@ public class ProductMgmt {
 	public static void main(String[] args) throws IOException {
 		
 		//상품명   |    수량   |    판매단가  |    매입단가  |   운송료
-		Scanner sc = new Scanner(new File("D:\\Workspace\\0710\\src\\prac\\productdata.txt"));
+		Scanner sc = new Scanner(new File("productdata.txt"));
 		
 		Product [] array = new Product[7];
 		
