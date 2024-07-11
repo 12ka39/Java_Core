@@ -1,8 +1,8 @@
 import java.io.FileNotFoundException;
 
 
-//프로그램 완성한 뒤에는 main 함수가 있는 클래스 아니라
-// 다른 클래스에서 실행하도, 알아서 main 함수 찾아서 실행한다 
+// 프로그램 완성한 뒤에는 main 함수가 있는 클래스 아니라
+// 다른 클래스에서 실행해도, 알아서 main 함수 찾아서 실행한다 
 
 public class SungjukMgmt { // 메인이 복잡할 수록 좋은 코드는 아님
 	public static void main(String[] args) throws FileNotFoundException { // 메인으로 던져진 예외처리는 JVM 가상머신으로 던져짐
