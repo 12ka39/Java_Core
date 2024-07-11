@@ -4,6 +4,11 @@ public class Product {
 	int price;
 	String maker;
 	
+	// new 연산자 = 힙메모리 공간 확보 (땅 사기)
+
+	// 생성자 = 객체의 필드를 초기화 하는 메소드
+	
+	
 	
 	// 생성자 오버로딩 
 	
