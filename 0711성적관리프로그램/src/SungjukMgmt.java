@@ -11,7 +11,8 @@ public class SungjukMgmt { // 메인이 복잡할 수록 좋은 코드는 아님
 		Input input = new Input(array); // 각 클래스에 12명 수첩 던져서 거기에 학생 정보 저장하도록
 		input.input();
 		
-		Calc calc = new Calc(array);
+		Calc calc = new Calc(array); // calc 생성자 만들기 전데 여기서 먼저 이런 코드를 생성하면, 
+				// 알아서 이클립스 툴이 생성자 코드 만들어준다. 오류 -> create constructor 
 		calc.calc();
 		
 		Output output = new Output(array);
