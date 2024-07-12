@@ -1,5 +1,5 @@
 
-public class Student {
+public class Student extends Object {
 	
 	private String hakbun, name;
 	private int kor, eng, mat, edp, tot; // edp는 전산과목
@@ -8,6 +8,22 @@ public class Student {
 	
 	
 	
+	
+	/*
+	@Override
+	public String toString() { // API문서 - public String toString()
+		
+		return String.format("%-5s\\t%7s\\t%5d\\t%5d\\t%5d\\t%5d\\t%5d\\t%8.1f\\t%5c%n",
+				this.hakbun, this.name, this.kor, this.eng, this.mat, this.edp,
+				this.tot, this.avg, this.grade);
+				
+	}
+	*/
+	
+	
+	
+
+
 	// 초기화할 때 (딱 입력 받을 때) 필요한 변수만 생성하자.
 	// avg, tot,  grade는 나중에 메소드 돌려서 생기니까
 	public Student(String hakbun, String name, int kor, int eng, int mat, int edp) {
@@ -18,6 +34,15 @@ public class Student {
 		this.eng = eng;
 		this.mat = mat;
 		this.edp = edp;
+	}
+
+
+	// toString 재정의 -> 자동으로 코드 생성할 수 있다
+	// 우클릭 -> source -> toString -> code style-> String.format
+	@Override
+	public String toString() {
+		return String.format("Student [hakbun=%s, name=%s, kor=%s, eng=%s, mat=%s, edp=%s, tot=%s, avg=%s, grade=%s]",
+				hakbun, name, kor, eng, mat, edp, tot, avg, grade);
 	}
 
 
@@ -115,4 +140,5 @@ public class Student {
 	public void setGrade(char grade) {
 		this.grade = grade;
 	}
+	
 }
