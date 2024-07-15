@@ -1,67 +1,73 @@
-
 public class Calc {
-	private Person [] array;
-	
-	int [] grade1 = {95000, 92000, 89000, 86000, 83000};
-	int [] grade2 = {80000, 75000, 70000, 65000, 60000};
-	
-	double [] taxRate = {0, 0.005, 0.007, 0.012};
-	int [] jojung = {0, 300, 500, 1000};
-	
-	
-	public Calc(Person [] array) {
+	private Employee [] array;
+	private int count;
+
+	public Calc(Employee[] array, int count) {
+		
 		this.array = array;
+		this.count = count;
+		
 	}
 	
-
-	void calc(){
-		for (Person p : this.array) {
+	void calc() {
+		
+		for(int i = 0 ; i < count ; i++) {
 			
-			// 급여 구하기
-			if (p.getGrade() == 1) { // 급 가져와서
-				switch(p.getHo()) { // 호 찾기
-					case 1: p.setSal(grade1[0]); break;
-					case 2: p.setSal(grade1[1]); break;
-					case 3: p.setSal(grade1[2]); break;
-					case 4: p.setSal(grade1[3]); break;
-					case 5: p.setSal(grade1[4]); break;
-					}
-			} else if (p.getGrade() == 2) {
-				switch(p.getHo()) { // 호 
-					case 1: p.setSal(grade2[0]); break;
-					case 2: p.setSal(grade2[1]); break;
-					case 3: p.setSal(grade2[2]); break;
-					case 4: p.setSal(grade2[3]); break;
-					case 5: p.setSal(grade2[4]); break;
-				}
-			}
+			Employee emp = this.array[i];
+			int fee = this.calcFee(emp.getGrade(), emp.getHo());  //급여 구하기
+			//지급액 = 급여 + 수당
+			int money = fee + emp.getBonus();
+			emp.setMoney(money);   //지급액 삽입
 			
-			// 지급액 = 급여 + 수당
-			int pay = p.getSal() + p.getMoney(); 
 			
-                               			
-			// 세금 = (지급액 * 세율) - 조정액
-			if(pay >=90000) {
-				int tax = (int) (pay * taxRate[3]) -  jojung[3];
-				p.setTax(tax);
-			}else if(pay >=80000){
-				int tax = (int) (pay * taxRate[2]) -  jojung[2];
-				p.setTax(tax);
-			}else if(pay >=70000){
-				int tax = (int) (pay * taxRate[1]) -  jojung[1];
-				p.setTax(tax);
-			} else { 
-				int tax = 0;
-				p.setTax(tax);
-			}
+			double taxRate = this.getTaxRate(money); //세율 구하기
+			int jojeng = this.getJojeng(money);   //조정액 구하기
+			//세금 = (지급액 * 세율) - 조정액
+			double tax = (money * taxRate) - jojeng;
+			emp.setTax(tax);    //세금 삽입
 			
- 			
-			// 차인지급액 = 지급액 - 세급
-			int taxpay = pay - p.getTax();
 			
-			p.setPay(pay);
-			p.setTax(taxpay);
+			//차인지급액 = 지급액 - 세금
+			long salary = (long)(money - tax);   //차인지급액 구하기
+			emp.setSalary(salary);    //차인 지급액 삽입
 		}
-		  
+	}
+	int calcFee(int grade, int ho) { //급, 호별 급여 구하기
+		int fee = 0;
+		switch(ho) {
+			case 1:	 fee = (grade == 1) ? 95000 : 80000; break;
+			case 2:  fee = (grade == 1) ? 92000 : 75000; break;
+			case 3:  fee = (grade == 1) ? 89000 : 70000; break;
+			case 4:  fee = (grade == 1) ? 86000 : 65000; break;
+			case 5:  fee = (grade == 1) ? 83000 : 60000; break;
+		}
+		return fee;
+	}
+	
+	
+	double getTaxRate(int jigup) {  //지급액별 세율 구하기
+		
+		double tax = 0.0;
+		
+		if(jigup < 70000) tax = 0.0;
+		else if(jigup >= 70000 && jigup < 80000) tax = 0.005;
+		else if(jigup >= 80000 && jigup < 90000) tax = 0.007;
+		else if(jigup >= 90000) tax = 0.012;
+		
+		return tax;
+		
+	}
+	
+	
+	int getJojeng(int jigup) {  //지급액별 조정액 구하기
+		
+		int jojeng = 0;
+		
+		if(jigup < 70000) jojeng = 0;
+		else if(jigup >= 70000 && jigup < 80000) jojeng = 300;
+		else if(jigup >= 80000 && jigup < 90000) jojeng = 500;
+		else if(jigup >= 90000) jojeng = 1000;
+		
+		return jojeng;
 	}
 }
