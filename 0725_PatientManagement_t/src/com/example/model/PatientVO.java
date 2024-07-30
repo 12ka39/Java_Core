@@ -21,10 +21,6 @@ public class PatientVO {
 		this.age = age;
 	}
 	
-	
-	
-	
-	
 
 	public PatientVO(int number, String dept, int operFee, int hospitalFee, int money) {
 		super();
@@ -35,6 +31,14 @@ public class PatientVO {
 		this.money = money;
 	}
 
+	
+
+	@Override 
+	public String toString(){
+		return String.format("%3d\t  %10s\t\t%,5d\t\t%,10d\t%,10d",
+				number, dept, operFee, hospitalFee, money);
+	}
+
 
 
 
@@ -43,44 +47,21 @@ public class PatientVO {
 	}
 
 
-
-
-
-
 	public void setNumber(int number) {
 		this.number = number;
 	}
-
-
-
-
-
 
 	public String getCode() {
 		return code;
 	}
 
-
-
-
-
-
 	public void setCode(String code) {
 		this.code = code;
 	}
 
-
-
-
-
-
 	public int getDays() {
 		return days;
 	}
-
-
-
-
 
 
 	public void setDays(int days) {
@@ -181,10 +162,4 @@ public class PatientVO {
 
 
 
-
-	@Override 
-	public String toString(){
-		return String.format("%3d\t  %10s\t\t%,5d\t\t%,10d\t%,10d",
-				number, dept, operFee, hospitalFee, money);
-	}
 }

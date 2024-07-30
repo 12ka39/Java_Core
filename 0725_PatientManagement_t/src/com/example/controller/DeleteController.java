@@ -17,7 +17,7 @@ public class DeleteController {
 	public boolean delete(int number) {
 		boolean isSucess = false;
 		try {
-			isSucess = this.dao.deletePatient(number);
+			isSucess = this.dao.deletePatient(number); // 인터페이스를 구현한 자식의 메소드
 		}catch(SQLException ex) {
 			System.out.println(ex.getMessage());
 		}

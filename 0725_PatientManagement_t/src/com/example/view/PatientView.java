@@ -27,10 +27,11 @@ public class PatientView {
 					isContinue = false; 
 					break;
 				default:   System.out.println("잘못된 번호를 입력하셨습니다.");
-				JOptionPane.showMessageDialog(null, "잘못된 번호를 입력하셨습니다.");
+				JOptionPane.showMessageDialog(null, "잘못된 번호를 입력하셨습니다."); // 이거 alert 창 꺼야 다음 줄 실행 됨
+				showMenu();
 			}
 		}
-		JOptionPane.showMessageDialog(null, "program is over..."); // 근데 창이 이클립스 내리고 뒤에 보인다
+		JOptionPane.showMessageDialog(null, "program is over..."); // alert 창이 모든 창 맨 뒤에 뜬다
 	}
 	
 	
@@ -39,7 +40,7 @@ public class PatientView {
 		List<PatientVO> list = sc.selectAllPatient();
 		System.out.println("번호\t진찰부서\t진찰비\t입원비\t치료비");
 		System.out.println("--------------------------------------------------------");
-		list.forEach(p -> System.out.printf("%d\t%s\t%,d\t%,d\t%,d%n",
+		list.forEach(p -> System.out.printf("%d\t%s\t%,d\t%,d\t%,d\t%n",
 					p.getNumber(), p.getDept(), p.getOperFee(), p.getHospitalFee(), p.getMoney()));
 		
 		System.out.println("삭제할 환자 등록 번호 : ");
@@ -69,6 +70,7 @@ public class PatientView {
 			}else {
 				System.out.println("환자 등록 실패");
 			}
+			
 			System.out.println("입력 / 출력 (I/O)? :");
 			i_o = this.scan.next();
 		}while (i_o.toUpperCase().equals("I"));

@@ -17,7 +17,7 @@ public class PatientDAOImpl implements PatientDAO {
 	}
 	
 	@Override
-	public boolean createPatient(PatientVO p) throws SQLException{
+	public boolean createPatient(PatientVO p) throws SQLException{ // 환자 1명 입력
 		Statement stmt = this.conn.createStatement();  //4.
 		StringBuffer sb = new StringBuffer();
 		sb.append("INSERT INTO patient ");

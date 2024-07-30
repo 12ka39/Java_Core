@@ -4,6 +4,7 @@ import com.example.model.PatientVO;
 
 public class CalcController {
 	private PatientVO p;
+	
 	public CalcController(PatientVO p) {
 		this.p = p;
 		this.calc();
