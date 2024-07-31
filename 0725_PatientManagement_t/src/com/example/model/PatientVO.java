@@ -14,24 +14,15 @@ public class PatientVO {
 	
 	
 	
+	public PatientVO() {}
+	
 	public PatientVO(int number, String code, int days, int age) {
 		this.number = number;
 		this.code = code;
 		this.days = days;
 		this.age = age;
 	}
-	
 
-	public PatientVO(int number, String dept, int operFee, int hospitalFee, int money) {
-		super();
-		this.number = number;
-		this.dept = dept;
-		this.operFee = operFee;
-		this.hospitalFee = hospitalFee;
-		this.money = money;
-	}
-
-	
 
 	@Override 
 	public String toString(){

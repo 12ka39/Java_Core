@@ -17,8 +17,9 @@ public interface PatientDAO {
 	 * 환자 등록 번호를 입력받아서 해당 번호의 환자 한명을 리턴한다.
 	 * @param 환자등록번호
 	 * @return 해당 환자 1명
+	 * @throws SQLException 
 	 */
-	PatientVO readPatient(int number);
+	PatientVO readPatient(int number) throws SQLException;
 	
 	
 	
@@ -34,8 +35,8 @@ public interface PatientDAO {
 	 * 수정할 환자정보를 입력받아서 수정 성공하면 true를 리턴하고, 실패하면 false를 리턴한다.
 	 * @param 수정할 환자
 	 * @return 성공여부
-	 */
-	boolean updatePatient(PatientVO p);
+	 */ 
+	void updatePatient(PatientVO p) throws SQLException;
 	
 	
 	
