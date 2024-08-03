@@ -27,3 +27,27 @@ BEGIN
 END
 //
 DELIMITER ;
+
+
+
+/* 사원 월급 정보 업데이트 -- 이거 문제있나?? 잘 안 됨 */
+/* 프로시저 만들기 위한 기본 틀 */
+UPDATE emp 
+SET deptno='영업부', sd_ho =300000, totalPay=323500, realPay=293500
+WHERE empno = 'A123';
+
+
+delimiter //
+CREATE PROCEDURE emp_update(
+	IN v_deptno VARCHAR(10),
+    IN v_sd_ho int,
+    IN v_totalPay int,
+    IN v_realPay int,
+    In v_empno VARCHAR(5)
+)
+BEGIN
+	UPDATE emp 
+	SET deptno='영업부', sd_ho =300000, totalPay=323500, realPay=293500
+	WHERE empno = 'A123';
+END //
+delimiter ;

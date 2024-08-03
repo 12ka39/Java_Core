@@ -1,23 +1,27 @@
 package com.employ.view;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 import com.employ.controller.CalcController;
 import com.employ.controller.InsertController;
 import com.employ.controller.SelectController;
+import com.employ.controller.UpdateController;
 import com.employ.model.EmployeeVO;
 
 public class EmployeeView {
 	private Scanner scan;
 	
 	
-	public EmployeeView() {
+	public EmployeeView() throws SQLException {
 		this.scan = new Scanner(System.in);
 		boolean isContinue = true;
 		while(isContinue) {
 			switch(showMenu()){
 			case 1: insertPay(); break; // 직원 월급 등록
-			case 2: printPay(); break; // 직원 월급 출력    
+			case 2: oneEmployeePay(); break; // 2. 직원 월급 출력  (검색)       
+			case 3: allEmployeePay(); break; // 3. 직원 월급 출력  (전체 직원)   
 			case 99: 
 				isContinue =false;
 				break;
@@ -30,7 +34,7 @@ public class EmployeeView {
 	}
 	
 	// 사원 한 명 검색
-	private EmployeeVO selectPatient() {
+	private EmployeeVO selectEmployee() {
 		SelectController sc = new SelectController();
 		System.out.print("검색하실 사원 번호 : "); String empno = this.scan.next();
 		EmployeeVO em = sc.selectEmployee(empno); // 검색한 결과가 담긴 직원정보들 
@@ -38,17 +42,47 @@ public class EmployeeView {
 		if(em == null) {
 			System.out.println("검색하신 사원이 없습니다");
 		} else {
-			System.out.printf("%s\t%s\t%d\t%d\t%d\t%n" ,
-					em.getEmpno(), em.getEname(), em.getSal(), em.getOvertime(),
-					em.getFamily());  
+			resultMenu();
+			System.out.printf("%s\t%s\t%s\t%d\t%,d\t%,d\t%,d\t%,d\t%,d\t%n" ,
+					em.getEmpno(), em.getEname(), em.getDeptno(), em.getSal(),
+					em.getSd_ho(), em.getSd_family(), em.getSd_night(), 
+					em.getTotalPay(), em.getRealPay());  
 		}
 		return em;
 	}
 
+	// 전체 직원 출력
+	private void allEmployeePay() {
+		SelectController sc = new SelectController();
+		List<EmployeeVO> list =  sc.selectAllEmployee();
+		
+		resultMenu();
+		if(list == null || list.size() == 0) System.out.println("등록된 직원 없습니다");
+		else if(list.size() > 0) {
+			System.out.println("안녕?");
+		}
+		
+		/*
+		 		else if(list.size() > 0) {
+			list.forEach(p -> System.out.printf("%d\t%s\t%,d\t%,d\t%,d%n", 
+					                        p.getNumber(), p.getDept(), p.getOperFee(),
+					                        p.getHospitalFee(), p.getMoney()));
+		}
+		 * */
+	}
+	
 
+	// 결과 메뉴 출력
+	private void resultMenu() {
+		System.out.println("                       << 사원관리 프로그램 >>");
+		System.out.println("---------------------------------------------------------------------------");
+		System.out.println("사원번호\t사원이름\t부서명\t기본급\t호급수당\t가족수당\t야간수당\t총금액\t실수령액");
+		System.out.println("---------------------------------------------------------------------------");
+	}
+	
 
 	 // 직원 월급 등록
-	private void insertPay() {
+	private void insertPay() throws SQLException {
 		String i_o =null;
 		do {
 			System.out.println("사원 등록 메뉴");
@@ -63,7 +97,6 @@ public class EmployeeView {
 				calcPay(em); // 계산
 				System.out.println("사원 등록 성공");
 			} else {
-				System.out.println("사원 등록 실패");
 				break;
 			}
 			System.out.println("입력 / 출력(I/O) ? : ");
@@ -79,15 +112,15 @@ public class EmployeeView {
 	
 	
 	// 사원 월급 계산
-	private void calcPay(EmployeeVO em) {
+	private void calcPay(EmployeeVO em) throws SQLException {
+		boolean result = false;
 		CalcController calc = new CalcController(em); // 계산하자.
-		
-		
+		UpdateController uc = new UpdateController(em); // DB 등록 컨트롤러
 	}
 	
 	
-	private void printPay() {
-		EmployeeVO em = selectPatient();
+	private void oneEmployeePay() {
+		EmployeeVO em = selectEmployee();
 		
 	}
 	
@@ -98,7 +131,8 @@ public class EmployeeView {
 		System.out.println("└----------------------------------------┘");
 		System.out.println("┌----------------------------------------┐");
 		System.out.println("│1. 직원 월급 등록                              │");
-		System.out.println("│2. 직원 월급 출력                        │");
+		System.out.println("│2. 직원 월급 출력  (검색)                      │");
+		System.out.println("│3. 직원 월급 출력  (전체 직원)              │");
 		System.out.println("│99. 프로그램 종료                          │");
 		System.out.println("└----------------------------------------┘");
 		System.out.print("원하시는 메뉴 번호를 선택해 주세요 >> : ");

@@ -19,6 +19,27 @@ public class EmployeeVO {
 	public EmployeeVO() {}
 
 
+	
+	
+	
+	public EmployeeVO(String empno, String ename, String deptno, int sal, int sd_ho, int sd_family, int sd_night,
+			int totalPay, int realPay) {
+		super();
+		this.empno = empno;
+		this.ename = ename;
+		this.deptno = deptno;
+		this.sal = sal;
+		this.sd_ho = sd_ho;
+		this.sd_family = sd_family;
+		this.sd_night = sd_night;
+		this.totalPay = totalPay;
+		this.realPay = realPay;
+	}
+
+
+
+
+
 	public EmployeeVO(String empno, String ename, int sal, int overtime, int family) {
 		super();
 		this.empno = empno;

@@ -1,6 +1,7 @@
 package com.employ.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.employ.model.EmployeeDAO;
 import com.employ.model.EmployeeDAOImpl;
@@ -20,10 +21,20 @@ public class SelectController {
 		} catch(SQLException ex){
 			System.out.println(ex.getMessage());
 		}
-		
-		
 		return em;
 	}
 
+	
+	public List<EmployeeVO> selectAllEmployee(){
+		 List<EmployeeVO> list = null;
+		 
+		 try {
+			 list = this.eDao.readAllEmployee();
+		 } catch(SQLException e) {
+			 System.out.println(e.getMessage());
+		 }
+		 
+		return list;
+	}
 	
 }
