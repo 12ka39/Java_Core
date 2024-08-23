@@ -1,5 +1,5 @@
 // Map에서 사용하는 forEach
-
+// Map 이터러블
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

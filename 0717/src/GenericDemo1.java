@@ -12,7 +12,7 @@ public class GenericDemo1 {
 		 // 제너릭은 <> 없어도 된다.  raw type
 		
 		Vector<String> v3 = new Vector<String>();
-		v3.add(5); // String을 넣으려고 만들었는데, int를 넣어서 오류
+		v3.add(5); // 오류 정상 String을 넣으려고 만들었는데, int를 넣어서 오류
 		
 		Vector<?> v4 = new Vector()<?>(); // wildcard type 런타임때 오브젝트로 바뀌는 타입이라고 생각한다
 		v4.add(5);  // 여기 이상

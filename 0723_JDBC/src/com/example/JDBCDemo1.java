@@ -15,20 +15,20 @@ public class JDBCDemo1 {
 	
 	public JDBCDemo1(){
 		this.dbconn = new DBConnection();
-		this.conn = new Co
-		
+		this.conn = this.dbconn.getConnection();
+	}	
 	
 
 	public static void main(String[] args) {
+		JDBCDemo1  demo = new JDBCDemo1();    //1,2,3
 		Scanner scan = new Scanner(System.in);
-		System.out.println("What is your name? : ");
+		System.out.print("What's name ? : ");
 		String name = scan.next().toUpperCase(); // 대문자로	
-		
 		Statement stmt = null;
-		ResultSet rs = null; 
-		 
+		ResultSet rs = null;
+		
 		try {
-			stmt =demo.conn.creatStatement(); //4
+			stmt = demo.conn.createStatement();  //4
 			StringBuffer sb = new StringBuffer();
 			sb.append("SELECT ename, sal, grade  ");
 			sb.append("FROM emp, salgrade   ");

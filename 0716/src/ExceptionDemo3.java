@@ -9,7 +9,7 @@ public class ExceptionDemo3 {
 			chulsu.setKor(120); // 오류가 발생하면 바로 catch로 넘어가서 10라인 실행 안 하고 13라인으로 넘어간다 (return 같은 거)
 			System.out.println(chulsu); // chulsu.toString()
 			
-		} catch(RuntimeException e) { // 요즘은 거의 컴파일 단계에서 오류 검사한다
+		} catch(KoreanException e) { // 요즘은 거의 컴파일 단계에서 오류 검사한다
 			System.out.println(e.getMessage());
 		}
 	}
@@ -39,7 +39,4 @@ class Student{
 	public String toString() {
 		return "kor = " + this.kor;
 	}
-	
-	
-	
 }

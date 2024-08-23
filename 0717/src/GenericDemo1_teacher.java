@@ -18,6 +18,7 @@ public class GenericDemo1_teacher {
 //		Product<Double> ballpen = new Product<Double>(100.0);
 //		Product<Object> obj = new Product<Object>(new Car());
 		//Car<?> car = new Car<Integer>(1000);
+		
 		//Car<Object> car1 = new Car<Integer>(1000);
 		//Object obj = car.getPrice();
 		//Car<? extends Number> car1 = new Car<Integer>(100);

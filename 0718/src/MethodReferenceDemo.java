@@ -11,7 +11,7 @@ interface MyPolygon{
 public class MethodReferenceDemo {
 	public static void main(String[] args) {
 		//람다
-		MyPolygon mp = (raian) -> Math.toDegrees(raian); // 반지름 들어오면 degree로 바꿔 리턴
+		MyPolygon mp = (radian) -> Math.toDegrees(radian); // 반지름 들어오면 degree로 바꿔 리턴
 		
 		double result = mp.radianToDegree(1); 
 		System.out.println(result); // 57.29577951308232

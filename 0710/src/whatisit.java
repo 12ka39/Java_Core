@@ -13,7 +13,7 @@ public class whatisit {
 		
 		whatisit d = new whatisit();
 		d.input(yh); // yh 넘길 때 주소값 넘어간다. Call by referance 
-		System.out.println("영희의 국어점수 :" + yh.kor()); // input함수에서 입력한 kor 값이 나온다
+		System.out.println("영희의 국어점수 :" + yh.kor); // input함수에서 입력한 kor 값이 나온다
 		d.calc(yh);
 		d.output(yh);
 		

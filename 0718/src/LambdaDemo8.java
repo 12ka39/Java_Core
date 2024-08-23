@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
 //람다로 list에 저장된 각 element 출력하는 법 
+// list 이터러블
 public class LambdaDemo8 {
 
 	public static void main(String[] args) {

@@ -27,7 +27,7 @@ import java.util.stream.Stream;
 public class StreamDemo {
 
 	public static void main(String[] args) {
-		// stream 생성 : 배열을 이용할 것인가, 아니면 Collection을 이용할 것인가에 따라 약간 다르다.
+		// stream 생성 : (1) 배열 (2) Collection
 		// API 문서 찾아가면서 배웠다
 		
 		// 배열로부터 Stream 생성하기 =>  Stream.of()
@@ -38,7 +38,7 @@ public class StreamDemo {
 		String [] strArray = {"사과", "배", "딸기", "복숭아", "레몬", "망고", "수박"};
 		Stream<String> s2 = Stream.of(strArray);
 		
-		
+		// Array를 객체화 -> Arrays
 		// Arrays 으로부터 Stream 생성하기 => Arrays.stream()
 		Stream<Integer> s3 = Arrays.stream(intArray);
 		Stream<String> s4 = Arrays.stream(strArray);
@@ -60,8 +60,8 @@ public class StreamDemo {
 	
 	
 		// 지정된 범위를 이용해서 Stream 생성하기
-		// range(int startInclusive, int endExclusive)
-		IntStream is = IntStream.range(1, 11); 
+		// range(int startInclusive, int endExclusive) range(포함, 미포함)
+		IntStream is = IntStream.range(1, 11); // 1~10
 		DoubleStream ds = DoubleStream.of(10,5);
 		
 		
