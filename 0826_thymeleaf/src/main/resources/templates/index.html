@@ -13,20 +13,20 @@
 	<!-- 태그 안에 java값을 text로 출력: <태그 th:text="${값}"> 
 	자바 값을 태그에 출력할 때 -->
 	<!-- http://localhost:8081/test/test1 로 접속해서  확인!!! -->
-	<a href=""  th:text="${name}"></a><br/>
-	<input type="text" th:value="${tel}"><br/>
+	<a href=""  th:text="${name}"></a><br/> <!-- th:text= 태그 사이에 넣을 값 -->
+	<input type="text" th:value="${tel}"><br/><!--  th:value= 입력 양식의 value로 출력 -->
 	
 	
 	<!-- a링크 주소로 text값을 넘길 때 @{ 주소 }
 	
 	jsp는 /test/test2name=?${name} 인데 
-	타임리프는               ? 대신 가로로 묶어줌
+	타임리프는               ? 대신 파라미터를 가로로 묶어줌
 	   @{/test/test2(name=${name})}
 	 -->
 	<a th:href="@{/test/test2(name=${name})}"  th:text="${name}"></a><br/>
 	
 	
-	
+<hr/>	
 	<!-- 조건문: <태그 th:if="${조건식 T/F}"></태그>  -->
 <div th:if="${session.loginId == null}">
 	로그인 전에 보이는 영역.<br/>

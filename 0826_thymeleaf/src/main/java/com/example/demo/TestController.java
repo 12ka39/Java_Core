@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/test")
 public class TestController {
+	
+	//http://localhost:8081/test/test1 로 접속하면 자동으로 로그인 정보가 실리도록 설정했다.
 	@GetMapping("/test1")
 	public String test1(Model m) {
 		m.addAttribute("name", "hello");
@@ -23,7 +25,7 @@ public class TestController {
 	
 	
 	// http://localhost:8081/test/test1 로 실행후
-	// 두 번째 hello 링크 클릭 -> 콘솔창과, 인터넷 주소 ?name=hello 확인
+	// 두 번째 hello 링크 클릭 -> 콘솔창(name: hello)과, 인터넷 주소 ?name=hello 확인
 	@GetMapping("/test2")
 	public String test2(String name) {
 		System.out.println("name: " + name);

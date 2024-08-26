@@ -98,20 +98,21 @@ public class BoardController {
 	}
 	
 	
-	
-	@GetMapping("/getbytitle")
-	public String getByTitle(String title, Model m) {
-		m.addAttribute("list", service.getByTitle(title));
-		
-		return "board/list";
-	}
-	
-	
+	//작성자로 검색
 	@GetMapping("/getbywriter")
 	public String getByWriter(String writer, Model m) {
 		m.addAttribute("list", service.getByWriter(writer));
-		
 		return "board/list";
 	}
+	
+
+	// 제목으로 검색
+	@GetMapping("/getbytitle")
+	public String getByTitle(String title, Model m) {
+		m.addAttribute("list", service.getByTitle(title));
+		return "board/list";
+	}
+	
+
 	
 }

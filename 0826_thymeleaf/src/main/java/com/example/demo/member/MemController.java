@@ -28,15 +28,14 @@ public class MemController {
 	
 	//회원가입 폼
 	@GetMapping("/join")
-	public void joinForm() {
-		//return "member/join"; 이었다가 바꾼 듯?
-	}
+	public void joinForm() {} // => return "member/join";
+	
 	
 	//회원가입
 	@PostMapping("/join")
 	public String join(Member m) {
 		service.addMem(m);
-		return "index";
+		return "boardIndex";
 	}
 	
 	
@@ -105,10 +104,8 @@ public class MemController {
 	public void myinfo(HttpSession session, Model m) {
 		m.addAttribute("m", service.getMem((String)session.getAttribute("loginId")));
 		//m이란 이름으로 세션 id를 이용해 찾은 회원정보를 model에 추가한다
-		//member/myinfo.jsp
+		//member/detail.html
 	}
-	
-
 	
 	
 	@PostMapping("/edit")

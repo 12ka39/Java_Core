@@ -68,21 +68,82 @@ public class BoardController {
 	
 	
 	//상세페이지
+//	@GetMapping("/detail")
+//	public void datail(int num, Model model) {
+//		model.addAttribute("b", service.getBoard(num));
+//	}
+	
+
 	@GetMapping("/detail")
-	public void datail(int num, Model model) {
-		model.addAttribute("b", service.getBoard(num));
-//		//쿠키 추가
-//		Cookie c1 = new Cookie("list", num+"");
-//		res.addCookie(c1);
-		
+	public void detail(int num, Model model, HttpServletResponse response, HttpServletRequest request) {
+	    // 쿠키에서 "viewedBoards"를 읽어옴
+	    Cookie[] cookies = request.getCookies();
+	    String viewedBoards = "";
+
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("viewedBoards")) {
+	                viewedBoards = cookie.getValue();
+	            }
+	        }
+	    }
+
+	    // 쿠키에 현재 글 번호가 없으면 추가
+	    if (!viewedBoards.contains(String.valueOf(num))) {
+	        viewedBoards = viewedBoards.isEmpty() ? String.valueOf(num) : viewedBoards + "-" + num;
+
+	        Cookie cookie = new Cookie("viewedBoards", viewedBoards);
+	        cookie.setPath("/"); 
+	        cookie.setMaxAge(7 * 24 * 60 * 60); // 7일 유효
+	        response.addCookie(cookie);
+	    }
+
+	    // 글 정보를 모델에 추가
+	    model.addAttribute("b", service.getBoard(num));
 	}
 	
+	
+	@GetMapping("/viewed")
+	public String viewedBoards(Model model, HttpServletRequest request) {
+	    // 쿠키에서 "viewedBoards" 값을 읽어옴
+	    Cookie[] cookies = request.getCookies();
+	    List<Board> viewedList = new ArrayList<>();
+
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("viewedBoards")) {
+	                String[] boardIds = cookie.getValue().split("-");
+	                for (String id : boardIds) {
+	                    int num = Integer.parseInt(id);
+	                    Board board = service.getBoard(num); // 각 num에 해당하는 Board 객체 조회
+	                    viewedList.add(board);
+	                }
+	            }
+	        }
+	    }
+
+	    model.addAttribute("viewedList", viewedList); // 모델에 추가
+	    return "/board/viewed"; // 리스트 뷰로 이동
+	}
+	
+	
+	
+
 	//오늘 읽은 글목록 List 
-//	@GetMapping("/todaylist")
-//	public void todaylist(HttpServletRequest req) {
-//		Cookie[] list = req.getCookies(); // string
-//		
-//	}
+	@GetMapping("/todaylist")
+	public void todaylist(HttpServletRequest req) {
+		Cookie[] list = req.getCookies(); // string
+
+		for(Cookie c : list) {
+			System.out.println(c.getValue());
+		}
+		
+//		<숙제>
+//		쿠키 -> 읽어와서 뒤에 덧붙여준다,
+//		구분자를 찍어주고,
+//		쿠키값을 읽어서 split으로 쪼개서 
+//		그 번호 검색한 거 arrayList에 담아서 뿌려주기
+	}
 	
 	@PostMapping("/edit")
 	public String edit(Board b) {

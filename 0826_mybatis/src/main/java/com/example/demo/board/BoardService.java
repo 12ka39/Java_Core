@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BoardService {
-
+	
 	@Autowired
 	private BoardDao dao;
 	
@@ -23,29 +23,20 @@ public class BoardService {
 		return dao.selectAll();
 	}
 	
+	public ArrayList<Board> getByTitle(String title){
+		return dao.selectByTitle("%"+title+"%");
+	}
 	
-//	public Board getContent(int num) {
-//		return dao.content(num);
-//	}
-	
+	public ArrayList<Board> getByWriter(String writer){
+		return dao.selectByWriter(writer);
+	}
 	
 	public void editBoard(Board b) {
 		dao.update(b);
 	}
 	
-	
 	public void delBoard(int num) {
 		dao.delete(num);
 	}
-
-	public ArrayList<Board> getByTitle(String title) {
-		return dao.selectByTitle("%" + title + "%");
-	}
-
-	public ArrayList<Board> getByWriter(String writer) {
-		return dao.selectByWriter("%" + writer + "%");
-	}
-	
-	
 	
 }

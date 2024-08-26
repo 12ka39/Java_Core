@@ -13,7 +13,7 @@
 	<a href="/member/join">회원가입</a><br/>
 	<a href="/member/login">멤버 로그인</a><br/>
 	<hr>
-	<a href="/test/login">테스트 로그인</a>
+	<a href="/test/login">테스트 로그인 - Mybatis로 구현X</a>
 </c:if>
 
 <c:if test="${sessionScope.loginId != null }">
@@ -24,7 +24,7 @@
 	
 	<a href="/member/myinfo">(teacher) 내정보확인</a><br/> <!-- 이거 과제 -->	
 	<a href="/member/out">탈퇴</a><br/>
-	<a href="/board/list">게시판</a><br/>
+	<a href="/board/list" style="color:salmon;">게시판 - Mybatis는 이 부분만 구현했어~~ </a><br/>
 	<hr>
 	<a href="/test/logout">테스트 로그아웃</a>
 </c:if>
