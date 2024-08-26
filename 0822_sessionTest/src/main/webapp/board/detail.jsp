@@ -15,7 +15,7 @@ const d = () => {
 </head>
 <body>
 <h3>상세 페이지- c:set var 변수 만들기</h3>
-<c:if test="${sessionScope.loginID != b.writer }">
+<c:if test="${sessionScope.loginId != b.writer }">
 	<c:set var="str">readonly</c:set> <!-- let str = "readonly"; 이거랑 같다 --> 
 </c:if>
 <form action="/board/edit" method="post">

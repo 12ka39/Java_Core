@@ -50,15 +50,6 @@ public class BoardDao {
 	}
 	
 	
-	
-	
-	public ArrayList<Board>selectByTitle(String title){ // like 패턴 검색 (DB %)
-		String sql = "select * from board where title like = ? order by num";
-		ArrayList<Board> list  =  (ArrayList<Board>) temp.query(sql, new BoardResultMap(), title);
-		return list;
-	}
-	
-	
 	// 글만 보여주기
 	public Board content(int num) {
 		String sql = "select content from board where num = ?";
@@ -80,7 +71,27 @@ public class BoardDao {
 		String sql = "delete from board where num = ?";
 		temp.update(sql, num);
 		
-		
 	}
+	
+	
+	
+	
+	
+	//숙제
+	public ArrayList<Board>selectByTitle(String title){ // like 패턴 검색 (DB %)
+		String sql = "select * from board where title like ? order by num";
+		String likePattern = "%" + title + "%";
+		ArrayList<Board> list  =  (ArrayList<Board>) temp.query(sql, new BoardResultMap(), likePattern);
+		return list;
+	}
+	
+
+	public ArrayList<Board>selectByWriter(String writer){ // like 패턴 검색 (DB %)
+		String sql = "select * from board where writer like ? order by num";
+		String likePattern = "%" + writer + "%";
+		ArrayList<Board> list  =  (ArrayList<Board>) temp.query(sql, new BoardResultMap(), likePattern);
+		return list;
+	}
+	
 	
 }

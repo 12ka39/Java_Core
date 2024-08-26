@@ -35,26 +35,27 @@ public class HomeController {
 
 	 */
 	
+	//연습이라 db연결 아무것도 안 함.
+	//페이지 이동만 확인해 보았다.
 	
-	@GetMapping("/") // get 요청만 받음  / 는 루트
+	@GetMapping("/") // get 요청만 받음  / 는 루트 경로
 	public String home() { // 요청을 처리하는 메서드는 뷰 페이지 경로를 반환
 		return "index"; // 뷰 페이지 경로 리턴
 	}
 	
 	
 	// 회원가입 폼
-	@GetMapping("/member/join") //url이 같아도 전송방식이 다르면 에러가 안 난다
+	@GetMapping("/member/join") //url이 같아도 전송방식(get/post)이 다르면 에러가 안 난다
 	public String joinform() {
 		return "joinForm";	
 	}
 
 	// 회원가입 완료
-	@PostMapping("/member/join") // post 요청만 받음  / 는 루트
+	@PostMapping("/member/join") // post 요청만 받음  
 	//public String join(Member m) { // 요청을 처리하는 메서드는 뷰 페이지 경로를 반환
 		// 스프링에서는 form으로 넘어온 id, pw를 자동으로 Member라는 VO로 저장해준다 
 		//service.addMember(m);
 	public String join() { // 요청을 처리하는 메서드는 뷰 페이지 경로를 반환
-		
 		return "join"; // 회원 가입 완료 메시지 출력
 	}
 	

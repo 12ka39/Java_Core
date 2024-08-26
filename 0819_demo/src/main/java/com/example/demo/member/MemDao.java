@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository // 자동 객체 생성
 	// DB작업.  자동으로 서버(톰캣) 메모리에 올라감
 public class MemDao {
-	public void insert() {
+	public void insert() { // 지금 dao까지 가보는 연습해본 거라 쿼리는 없음. 
+								// 콘솔에 메시지만 띄워보았다.
 		System.out.println("dao inesrt");
 	}
 	

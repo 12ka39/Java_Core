@@ -16,6 +16,16 @@ public class GuestController {
 	GuestService service;
 	
 	
+	// 글 목록
+	@RequestMapping("/list")
+	public String selectAll(Model m) {
+		m.addAttribute("list", service.selectAll());
+		return "guest/list";
+	}
+	
+	// 회원 한 명의 상세정보
+	// guest/list.jsp에서 요청 <a href="/guest/detail?num=${c.num }">
+	// ?num=${c.num } 는 get방식
 	@GetMapping("/detail")
 	public String detail(int num, Model m) { 
 		Guest g= service.getGuest(num);
@@ -28,15 +38,19 @@ public class GuestController {
 		return "guest/detail";
 	}
 	
+//	<과제>
+//	방명록(vo: 글번호(자동할당), 작성자, 글비밀번호, 작성일(sysdate() 자동할당), 내용)
+//	글작성
+//	글목록
+//	글수정(글비밀번호 물어봐서 맞으면 실행, 아니면 취소)
+//	글삭제(글비밀번호 물어봐서 맞으면 실행, 아니면 취소)
+	// 글 수정
+//	@PostMapping("/edit") 
+//	public Guest edit(Guest g, Model m) {
+//		
+//		return 
+//	}
 	
-	
-	
-	// 글 목록
-	@RequestMapping("/list")
-	public String selectAll(Model m) {
-		m.addAttribute("list", service.selectAll());
-		return "guest/list";
-	}
 
 	// 방명록 글 작성 페이지 열기
 	@GetMapping("/write")

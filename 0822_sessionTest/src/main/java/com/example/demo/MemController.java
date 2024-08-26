@@ -20,12 +20,14 @@ public class MemController {
 	@Autowired
 	private MemService service;
 	
+	//회원가입 폼
 	@GetMapping("/join")
 	public String joinForm() {
 		return "member/joinAjax";
+		//return "member/join"; 이었다가 바꾼 듯?
 	}
 	
-	
+	//회원가입
 	@PostMapping("/join")
 	public String join(Member m) {
 		service.addMem(m);
@@ -33,7 +35,7 @@ public class MemController {
 	}
 	
 	
-	
+	//아이디 중복체크(팝업창 띄우는 거)
 	@PostMapping("/idcheck")
 	public String idcheck(String id, Model model) {
 		Member m = service.getMem(id);
@@ -53,15 +55,29 @@ public class MemController {
 	
 	//ajax로 id 중복체크
 	// http://localhost:8081/member/idcheckAjax
-	@ResponseBody
+	@ResponseBody 
+	//(메서드가 반환하는 객체를 JSON, XML 등으로 자동 변환하여 HTTP 응답의 본문으로 전달.)
+	
 	@GetMapping("/idcheckAjax")
 	public  Map idcheckAjax(String id) {
+		//Model, ModelAndView는 jsp파일에 데이터 보내는 거라서 
+		//페이지 없는 비동기 방식에는 쓸 수 없다
 		Map map = new HashMap();
+		/*
+		 Map<String, Integer> map = new HashMap<>();
+		 제네릭을 사용하지 않고 Map map = new HashMap();처럼 선언하면, 
+		 모든 타입의 객체를 키와 값으로 저장할 수 있지만, 
+		 나중에 꺼낼 때 캐스팅이 필요할 수 있습니다. 
+		 
+		 제네릭을 사용하는 것이 권장됩니다. 
+		 제네릭을 사용하면 컴파일 시점에 타입을 검증하여 런타임 오류를 줄일 수 있습니다.
+		 */
 		boolean flag = false;
 		if(service.getMem(id) == null) { // 중복 id 없으면
 			flag = true;
 		}
 		map.put("flag", flag);
+		System.out.println(map); // {flag=false}  {flag=true} 이런 게 뜬다
 		return map;
 		/*  결과 {
 	    "flag": true
@@ -75,10 +91,11 @@ public class MemController {
 	public void loginForm() { 	}
 	
 	
+	//로그인
 	@PostMapping("/login")
 	public String login(Member m, HttpSession session, Model model) {
 		Member m2 = service.getMem(m.getId());
-		if(m2!=null && m2.getPwd().equals(m.getPwd())) {
+		if(m2!=null && m2.getPwd().equals(m.getPwd())) { //id, pw가 일치하면
 			session.setAttribute("loginId", m2.getId());
 			session.setAttribute("type", m2.getType()); // 세션을 수정해야 회원 타입이 바뀐다
 		}else {
@@ -96,7 +113,7 @@ public class MemController {
 	
 	
 	
-	
+	// 회원 상세정보 페이지
 	@GetMapping("/myinfo")
 	public void myinfo(HttpSession session, Model m) {
 		m.addAttribute("m", service.getMem((String)session.getAttribute("loginId")));
@@ -117,7 +134,7 @@ public class MemController {
 	
 	
 	
-	
+	//회원 탈퇴
 	@GetMapping("/out")
 	public String out(HttpSession session) { // 로그인한 사람 id 가져오려고
 		String loginId = (String) session.getAttribute("loginId");

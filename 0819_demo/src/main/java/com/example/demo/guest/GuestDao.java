@@ -16,6 +16,9 @@ import conn.MysqlConnect;
 public class GuestDao {
 	private MysqlConnect dbconn; 
 	
+	//db는 guestbook. sql 쿼리문 있음
+	//메서드마다 중복되는 코드가 많다. 점점 더 간편한 방법을 배워갈 거다.
+	
 	public GuestDao() {
 		dbconn = MysqlConnect.getInstance();
 	}
@@ -100,8 +103,6 @@ public class GuestDao {
 		}
 		return null;
 	}
-	
-	
 	
 	
 	

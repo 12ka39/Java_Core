@@ -39,7 +39,7 @@ public class MemController {
 	
 	
 	//검색
-	@GetMapping("/get")
+	@GetMapping("/get") // http://localhost:8081/mem/get
 	public String get() {
 		service.getMember();
 		return "member/info";
@@ -47,7 +47,7 @@ public class MemController {
 	
 	
 	//전체검색  url: getall    view: getall.jsp
-	@GetMapping("/getall")
+	@GetMapping("/getall") // http://localhost:8081/mem/getall
 	public String getAll() {
 		service.getAll();
 		return "member/getall";

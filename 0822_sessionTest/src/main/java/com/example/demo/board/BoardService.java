@@ -25,7 +25,7 @@ public class BoardService {
 	
 	
 	public ArrayList<Board> getByTitle(String title){
-		return dao.selectByTitle("%"+ title + "%");
+		return dao.selectByTitle(title);
 	}
 	
 
