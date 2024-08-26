@@ -6,6 +6,7 @@
 </head>
 <body>
 <h3>게시판</h3>
+<!-- http://localhost:8081/member/ 로 접속 -->
 [[${msg}]]
 <div th:if="${session.loginId == null}">
 	<a href="/member/join">회원가입</a><br/>

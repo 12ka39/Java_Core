@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +8,6 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	const a = (num) => {
-
 		//비동기 요청 객체 생성
 		let req = new XMLHttpRequest(); 
 		
@@ -44,7 +46,6 @@
 		location.href = url;
 	}
 </script>
-
 </head>
 <body>
 <h3>게시판</h3>
@@ -59,14 +60,13 @@
 <input type="button" value="검색" onclick="c()">
 <table border="1">
 	<tr><th>num</th><th>title</th><th>writer</th></tr>
-	
-		<tr th:each="b:${list}" >
-			<td><a th:href="@{/board/detail(num=${b.num})}" th:text="${b.num}"></a></td>
-			<td th:text="${b.title}" th:onmouseover="a([[${b.num}]])" onmouseout="b()"></td>
-			<td th:text="${b.writer}"></td>
+	<c:forEach var="b" items="${list }">
+		<tr>
+			<td><a href="/board/detail?num=${b.num }">${b.num }</a></td>
+			<td><span onmouseover="a(${b.num })" onmouseout="b()">${b.title }</span></td>
+			<td>${b.writer }</td>
 		</tr>
-	
+	</c:forEach>
 </table>
-
 </body>
 </html>

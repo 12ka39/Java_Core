@@ -108,6 +108,8 @@ public class MemController {
 		//member/myinfo.jsp
 	}
 	
+
+	
 	
 	@PostMapping("/edit")
 	public String edit(Member m, HttpSession session) {
