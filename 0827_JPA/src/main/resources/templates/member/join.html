@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+	//get방식 요청 (String) -- id 중복체크
+	const a = () => {
+		let req = new XMLHttpRequest(); 
+		req.onload = () => {   
+			let res = document.getElementById("res");
+			let msg = '중복된 아이디';
+			
+			let obj = JSON.parse(req.responseText); 
+			
+			if(obj.flag){ 
+				msg = '사용가능한 아이디';
+			}
+			res.innerHTML = msg;
+		}
+
+		
+		let params = 'id='+document.getElementById("id").value; 
+		
+		req.open('get', '/member/idcheckAjax?'+params); 
+		
+		req.send();
+	}
+</script>
+</head>
+<body>
+<h3>회원가입</h3>
+<form action="/member/join" method="post" name="f">
+	<table border="1">
+		<tr><th>ID</th>
+		<td>
+			<input type="text" name="id" id="id">
+			<input type="button" value="중복체크" onclick="a()">
+			<div id="res"></div><!-- 사용 가능/불가능 출력하는 div -->
+		</td></tr>
+		<tr><th>PWD</th><td><input type="password" name="pwd"></td></tr>
+		<tr><th>이름</th><td><input type="text" name="name"></td></tr>
+		<tr><th>이메일</th><td><input type="text" name="email"></td></tr>
+		<tr><th>회원타입</th>
+			<td>
+				<select name="type">
+					<option>구매자</option>
+					<option>판매자</option>
+				</select>
+			</td></tr>
+		<tr><th>JOIN</th><td><input type="submit" value="회원가입"></td></tr>
+	</table>
+</form>
+</body>
+</html>

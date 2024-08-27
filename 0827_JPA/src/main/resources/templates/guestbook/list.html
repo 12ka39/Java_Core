@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>글목록</h3>
+<table border="1">
+	<tr>
+		<th>num</th>
+		<th>writer</th>
+		<th>wdate</th>
+		<th>pwd</th>
+		<th>content</th>
+	</tr>
+	
+	<tr th:each="a : ${list}">
+		<td th:text="${a.num}"></td>
+		<td th:text="${a.writer}"></td>
+		<td th:text="${a.wdate}"></td>
+		<td th:text="${a.pwd}"></td>
+		<td th:text="${a.content}"></td>
+
+<!-- 		<td>[[${a.writer}]]</td>   이렇게 해도 됨-->
+	</tr>
+
+</table>
+</body>
+</html>

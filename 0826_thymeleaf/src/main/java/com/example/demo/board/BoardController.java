@@ -73,7 +73,7 @@ public class BoardController {
 //		model.addAttribute("b", service.getBoard(num));
 //	}
 	
-
+	//
 	@GetMapping("/detail")
 	public void detail(int num, Model model, HttpServletResponse response, HttpServletRequest request) {
 	    // 쿠키에서 "viewedBoards"를 읽어옴
