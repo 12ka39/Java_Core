@@ -15,7 +15,7 @@ public class BoardService {
 	private BoardDao dao;
 	
 	//추가, 수정
-	public void addBoard(BoardDto b) {
+	public void saveBoard(BoardDto b) {
 		dao.save(new Board(b.getNum(), b.getWriter(), b.getWdate(), b.getTitle(), b.getContent()));
 	}
 	
@@ -47,14 +47,16 @@ public class BoardService {
 	}
 	
 
-	public ArrayList<BoardDto> getByWriter(String writer) {
-		List<Board>  l =  dao.findByWriter(new Member(writer, "", "", "",""));
+	
+	public ArrayList<BoardDto> getByWriter(String writer){
+		List<Board> l = dao.findByWriter(new Member(writer, "","","",""));
 		ArrayList<BoardDto> list = new ArrayList<>();
-		for( Board b : l) {
-			list.add(new BoardDto(b.getNum(), b.getWriter(), b.getWdate(), b.getTitle(), b.getContent()));
+		for(Board b:l) {
+			list.add(new BoardDto(b.getNum(), b.getWriter(), b.getWdate(), 
+					b.getTitle(), b.getContent()));
 		}
 		return list;
-	}
+	}	
 	
 	
 	public void delBoard(int num) {

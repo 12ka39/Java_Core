@@ -21,21 +21,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Entity
+
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 
-@Entity
 public class Board {
-	@Id
+	@Id // PK 정의
 	@GeneratedValue(strategy = GenerationType.IDENTITY)  // 자동 넘버링 auto increment
 	private int num;
 	
 	@ManyToOne // board:member => 다대일    (왼쪽에 현재 엔터티 온다) 보드에 멤버가 여럿 작성 가능
-	@JoinColumn(nullable=false) // , name="" 이름 바꿀 거면.
-	@OnDelete(action=OnDeleteAction.CASCADE) // on delete cascade
+	@JoinColumn(nullable=false) //     , name="" 이름 바꿀 거면.
+	@OnDelete(action=OnDeleteAction.CASCADE) // on delete cascade   부모 삭제시 자식도 삭제됨
 	private Member writer; // 연관되는 entity 타입으로 지정  - 실제 테이블 만들어질 땐 String 타입으로 만들어짐
 	private Date wdate; // j
 	private String title;

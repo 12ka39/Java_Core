@@ -17,7 +17,7 @@
 			let obj = JSON.parse(req.responseText);
 			let txt = "글 상세내용<br/>";
 			txt += "num:"+obj.num+"<br/>";
-			txt += "writer:"+obj.writer+"<br/>";
+			txt += "writer:"+obj.writer.id+"<br/>";
 			txt += "wdate:"+obj.wdate+"<br/>";
 			txt += "title:"+obj.title+"<br/>";
 			txt += "content:"+obj.content+"<br/>";
@@ -44,13 +44,12 @@
 		location.href = url;
 	}
 </script>
-
 </head>
 <body>
 <h3>게시판</h3>
 <span id="res" style="position:absolute;top:100px;left:300px"></span>
-<a href="/board/viewed">오늘 읽은 글목록</a><br/>
-<a href="/board/add">글작성 - 안 짰음 오류 나는 거 정상</a><br/>
+<a href="/board/today">오늘 읽은 글목록</a><br/>
+<a href="/board/add">글작성</a><br/>
 <select id="gettype">
 	<option value="writer">작성자</option>
 	<option value="title">제목</option>
@@ -63,7 +62,7 @@
 		<tr th:each="b:${list}" >
 			<td><a th:href="@{/board/detail(num=${b.num})}" th:text="${b.num}"></a></td>
 			<td th:text="${b.title}" th:onmouseover="a([[${b.num}]])" onmouseout="b()"></td>
-			<td th:text="${b.writer}"></td>
+			<td th:text="${b.writer.id}"></td>
 		</tr>
 	
 </table>

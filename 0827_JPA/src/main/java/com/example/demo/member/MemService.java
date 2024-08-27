@@ -11,7 +11,7 @@ public class MemService {
 	@Autowired
 	private MemberDao dao;
 	
-	//	멤버 추가, 수정: 모든 컬럼 수정 (한 컬럼만 수정하면 다른 건 null이 되니까 그 부분은 코드를 짜야 함..)
+	//	 save()  멤버 추가, 수정: 모든 컬럼 수정 (한 컬럼만 수정하면 다른 건 null이 되니까 그 부분은 코드를 짜야 함..)
 	/* 이건 다른 데서 가져온 건데 대충 이런 식
 	 		BoardDto ob = service.getBoard(b.getNum()); // 원본 글 검색해서
 			ob.setTitle(b.getTitle()); // 수정할 정보 타이틀, 내용(content)만 수정

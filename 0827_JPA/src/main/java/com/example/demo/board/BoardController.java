@@ -37,7 +37,7 @@ public class BoardController {
 	
 	@PostMapping("/add")
 	public String add(BoardDto b) {
-		service.addBoard(b);
+		service.saveBoard(b);
 		return "redirect:/board/list";
 	}
 	
@@ -69,21 +69,21 @@ public class BoardController {
 	
 	//상세페이지 (쿠키로 오늘 읽은 글 번호 저장)
 	@GetMapping("/detail")
-	public void datail(int num, Model model, HttpServletRequest req, HttpServletResponse res) {
+	public String detail(int num, Model model, HttpServletRequest req, HttpServletResponse res) {
 		model.addAttribute("b", service.getBoard(num));
 		String val = "";
-		Cookie[] cookie = req.getCookies();
-		for (Cookie c : cookie) {
-			if(c.getName().equals("today")) { 
-				val = c.getValue();
-				val += "/" + num; //1,2,3
+		Cookie[] c = req.getCookies();
+		for (Cookie cc : c) {
+			if (cc.getName().equals("today")) {
+				val = cc.getValue();
+				val += "/" + num; // 1/2/3 이렇게 저장
 			}
 		}
-		
-		if(val.equals("")) {
-			val = num+ "";
+		if (val.equals("")) {
+			val = num + "";
 		}
 		res.addCookie(new Cookie("today", val));
+		return "board/detail";
 	}
 	
 	
@@ -91,17 +91,16 @@ public class BoardController {
 	@GetMapping("/today")
 	public String today(HttpServletRequest req, Model model) {
 		String val = "";
-		Cookie[] cookie = req.getCookies();
-		for(Cookie c : cookie) {
-			if(c.getName().equals("today")) {
-				val = c.getValue();
+		Cookie[] c = req.getCookies();
+		for (Cookie cc : c) {
+			if (cc.getName().equals("today")) {
+				val = cc.getValue();
 			}
 		}
-		
 		ArrayList<BoardDto> list = new ArrayList<>();
 		if (!val.equals("")) {
 			String[] val2 = val.split("/");
-			for(String n : val2) {
+			for (String n : val2) {
 				int num = Integer.parseInt(n);
 				list.add(service.getBoard(num));
 			}
@@ -111,16 +110,16 @@ public class BoardController {
 	}
 	
 	
-	
 	@PostMapping("/edit")
 	public String edit(BoardDto b) {
-		//수정하기 전 원본 글 정보검색. save()는 모든 컬럼 수정. 누락된 값은 null;
+		//수정하기 전 원본 글 정보검색. save()모든 컬럼 수정. 누락된 값은 null. 
 		BoardDto ob = service.getBoard(b.getNum()); // 원본 글 검색해서
-		ob.setTitle(b.getTitle()); // 수정할 정보 타이틀, 내용(content)만 수정
+		ob.setTitle(b.getTitle());  // 수정할 정보 타이틀, 내용(content)만 수정
 		ob.setContent(b.getContent());
 		service.saveBoard(ob);
 		return "redirect:/board/list";
 	}
+	
 	
 	
 	@GetMapping("/del")
