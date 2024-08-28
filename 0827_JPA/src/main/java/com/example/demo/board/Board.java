@@ -35,10 +35,11 @@ public class Board {
 	private int num;
 	
 	@ManyToOne // board:member => 다대일    (왼쪽에 현재 엔터티 온다) 보드에 멤버가 여럿 작성 가능
-	@JoinColumn(nullable=false) //     , name="" 이름 바꿀 거면.
+	@JoinColumn(nullable=false) //    null허용 X
 	@OnDelete(action=OnDeleteAction.CASCADE) // on delete cascade   부모 삭제시 자식도 삭제됨
-	private Member writer; // 연관되는 entity 타입으로 지정  - 실제 테이블 만들어질 땐 String 타입으로 만들어짐
-	private Date wdate; // j
+	private Member writer; // 연관되는 entity 타입으로 지정(Member)  - 실제 테이블 만들어질 땐 String 타입으로 만들어짐
+	
+	private Date wdate; // import java.util.Date; 이거다.. sql아님..
 	private String title;
 	private String content;
 	

@@ -21,7 +21,15 @@
 	<a href="/member/logout">로그아웃</a><br/>
 	<a href="/member/out">탈퇴</a><br/>
 	<a href="/guestbook/list">글목록</a><br/>
-
+	<!-- 로그인 해서도 판매/구매자 목록이 달라야 하니까 -->
+	<div th:if="${session.type == '판매자'}" >
+		판매자 메뉴<br/>
+		<a href="/prod/list">내 상품 목록</a><br/> 
+	</div>
+	<div th:if="${session.type == '구매자'}">
+		구매자 메뉴<br/>
+		<a href="/prod/list">전체 상품 목록</a><br/> 
+	</div>
 </div>
 </body>
 </html>
