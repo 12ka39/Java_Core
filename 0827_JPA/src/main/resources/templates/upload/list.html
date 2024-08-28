@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>파일 목록</h3>
+<!--  http://localhost:8081/upload/list 접속 -->
+<a href="/upload/form">파일등록</a><br/>
+<ul>
+	<li th:each="f : ${files}">
+		[[${f}]] <br/>
+		<img th:src="@{/upload/read-img(name=${f})}">
+	</li>
+	
+	
+</ul>
+</body>
+</html>

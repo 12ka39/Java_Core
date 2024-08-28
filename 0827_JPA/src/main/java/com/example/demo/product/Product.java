@@ -29,7 +29,7 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int num;
 	private String name;
-	private int pirce;
+	private int price;
 	private int amount;
 	
 	@ManyToOne	

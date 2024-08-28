@@ -19,12 +19,16 @@
 	<input type="button" value="검색" onclick="a()">
 </div>
 <table border="1">
-<tr><th>num</th><th>name</th><th>price</th><th>seller</th></tr>
+<tr><th>num</th><th>name</th><th>price</th><th>seller</th><th>img</th></tr>
 <tr th:each="p:${list}">
 	<td th:text="${p.num}"></td>
 	<td th:text="${p.name}"></td>
 	<td th:text="${p.price}"></td>
 	<td th:text="${p.seller.id}"></td>
+	<td> 
+		<img th:src="@{/prod/read-img(fname=${p.img})}"
+		style="width:100px;height:100px">  
+	</td>
 </tr>
 </table>
 </body>
