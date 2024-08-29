@@ -20,7 +20,7 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 	@Transactional
 	@Modifying
 	//@Query는  import가 jpa.repository.Query 가 아니면 오류 뜬다.
-	@Query(value="update article set cnt=cnt+1 where num=:num", nativeQuery=true)
+	@Query(value = "update article set cnt=cnt+1 where num=:num", nativeQuery = true)
 	void updateCnt(@Param("num") int num); // 파람으로 받은 글번호 :num
 	
 }

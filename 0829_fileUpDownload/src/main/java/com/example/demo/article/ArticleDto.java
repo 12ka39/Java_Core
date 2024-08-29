@@ -21,7 +21,7 @@ import lombok.ToString;
 @ToString
 
 public class ArticleDto {
-	
+
 	private int num;
 	private Member writer;
 	private Date wdate;

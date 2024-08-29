@@ -6,7 +6,6 @@
 </head>
 <body>
 <h3>자료 상세 페이지</h3>
-<form action="/board/edit" method="post">
 <table border="1">
 <tr>
 	<th>num</th>
@@ -15,11 +14,12 @@
 <tr>
 	<th>writer</th>
 	<td><input type="text" th:value="${dto.writer.id }" readonly></td>
+		<!-- writer는 Member 타입이기 때문에 writer만 쓰면 id 제외한 다른 데이터 타입도 다 나온다 -->
 </tr>
 <tr>
 	<th>wdate</th>
 	<td><input type="text" th:value="${dto.wdate }" readonly></td>
-		<!--  type="date"는 뭐가 잘 안 되는 모양이다 -->
+			<!--  type="date"는 뭐가 잘 안 되는 듯..? -->
 </tr>
 <tr>
 	<th>title</th>
@@ -27,8 +27,11 @@
 </tr>
 <tr>
 	<th>자료</th>
-	<td><a th:text="${dto.data }" th:href="@{/data/fname(${dto.data}, num=${dto.num})}"></a><br/>
-	다운수: <span th:text="${dto.cnt}"></span>
+	<td>
+		<a th:text="${dto.data}" 
+		th:href="@{/data/down(fname=${dto.data},num=${dto.num })}">
+		</a><br/>
+		다운수:<span th:text="${dto.cnt}"></span>
 	</td>
 </tr>
 <tr>
@@ -37,6 +40,6 @@
 </tr>
 
 </table>
-</form>
+<a href="/data/list">리스트로 돌아가기</a>
 </body>
 </html>
