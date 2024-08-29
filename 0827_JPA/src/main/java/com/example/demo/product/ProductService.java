@@ -30,7 +30,7 @@ public class ProductService {
 		Product entity = dao.findById(num).orElse(null); // .orElse(null 이거 안 적어주면 오류
 		if (entity != null) {
 			return new ProductDto(entity.getNum(), entity.getName(), entity.getPrice(), entity.getAmount(),
-					entity.getSeller(), entity.getImg(), null);
+					entity.getSeller(), entity.getImg(), null); // 여기 null은 Dto의 MultipartFile f의 값
 		}
 		return null;
 	}	
@@ -57,6 +57,9 @@ public class ProductService {
 	//판매자로 검색
 	public ArrayList<ProductDto> getBySeller(String seller) {
 		List<Product> l = dao.findBySeller(new Member(seller, "", "", "", ""));
+			//일단은 new Member(seller) 생성자를 안 만들어서 이렇게 생성한 거고,
+			// new Member(seller, "", "", "", "")처럼 생성하는 이유는, findBySeller 메서드가 Member 객체를 요구하기 때문
+			// 그리고 메서드 호출 시 seller 외에는 필요하지 않으므로 기본값으로 비워둔 것입니다.
 		ArrayList<ProductDto> list = new ArrayList<ProductDto>();
 		for (Product entity : l) {
 			list.add(new ProductDto(entity.getNum(), entity.getName(), 
@@ -65,8 +68,9 @@ public class ProductService {
 		}
 		return list;
 	}
+	
 
-//	가격대로 검색
+	//가격대로 검색
 	public ArrayList<ProductDto> getByPrice(int p1, int p2) {
 		List<Product> l = dao.findByPriceBetween(p1, p2);
 		ArrayList<ProductDto> list = new ArrayList<ProductDto>();
@@ -77,7 +81,8 @@ public class ProductService {
 		return list;
 	}
 
-//	상품명으로 검색
+	
+	//상품명으로 검색
 	public ArrayList<ProductDto> getByName(String name) {
 		List<Product> l = dao.findByNameLike("%" + name + "%");
 		ArrayList<ProductDto> list = new ArrayList<ProductDto>();
@@ -87,5 +92,6 @@ public class ProductService {
 		}
 		return list;
 	}
+	
 	
 }

@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
 </script>
 
 </head>
@@ -25,19 +24,25 @@
 	<input type="button" value="검색" onclick="a()">
 </div>
 
+
 <table border="1">
-	<tr><th>num</th><th>price</th><th>seller</th><th>img</th></tr>
+	<tr><th>num</th><th>name</th><th>price</th><th>amount</th><th>seller</th><th>img</th></tr>
 	<tr th:each="p : ${list}">
 		<td th:text="${p.num}"></td>
-		<td th:text="${p.name}"></td>
+		<td><a th:text="${p.name}" th:href="@{/prod/detail(num=${p.num})}"></a></td>
 		<td th:text="${p.price}"></td>
+		<td th:text="${p.amount}"></td>
 		<td th:text="${p.seller.id}"></td>
 		<!-- seller가 Member 타입이라 p.seller만 쓰면 전체 컬럼 다 나오니까 id까지 적어주자 -->
 		<td>
 			<!-- for문 돌면서 @{/prod/read-img(fname=${p.img}) 각각 여기 경로로 요청하면
 			바이너리 파일이 반환된다고 한다? -->
-			<img th:src="@{/prod/read-img(fname=${p.img})"
-			style="width:100px; height:100px;">
+		
+<!-- 		<img src=""> 자바 값 필요 없을 땐 이렇게만 써도 되고 -->
+ 			<!-- 자바값 필요하면 이렇게 적어야 한다 -->
+<!--  			이미지의 자원 위치를 나타내는 속성 th:src. 보안 때문에 컨트롤러 통해서 한다 -->
+		<img th:src="@{/prod/read-img(fname=${p.img})}"  
+		style="width:100px;height:100px">  
 		</td>
 	</tr>
 </table>

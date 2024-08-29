@@ -1,0 +1,110 @@
+s<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	//페이지 시작 시 -> form을 안 보이게 한다
+	window.onload = () => {
+		f.style.display = 'none'; // 이미지 수정폼 화면에 안 보이게 설정
+	}
+	
+	//img 수정 버튼
+	const a = () => {
+		f.style.display = ''; // display값 none에서 '' 로 지워줘서 -> 화면에 보이게
+	}
+	
+	
+	//img 수정취소 버튼
+	const b = () => {
+		f.style.display = 'none';
+	}
+	
+	
+	
+</script>
+
+</head>
+<body>
+<h3>상세 페이지</h3>
+<img th:src="@{/prod/read-img(fname=${p.img})}"
+		style="width:150px;height:150px"> <br/>
+<input type="button" value="이미지 수정" onclick="a()">
+<form name="f" action="/prod/edit-img" method="post" 
+enctype="multipart/form-data">
+새 이미지:<input type="file" name="f"><br/>
+<input type="hidden" name="num" th:value="${p.num}">
+<input type="submit" value="수정">
+<input type="button" value="수정취소" onclick="b()">
+</form>
+
+<form action="/prod/edit" method="post">
+<table border="1">
+	<tr>
+		<th>num</th>
+		<td>
+			<input type="text" th:value="${p.num}" name="num" readonly> 
+		</td>
+	</tr>
+	<tr>
+		<th>name</th>
+		<td>
+			<input type="text" th:value="${p.name}" name="name"> 
+		</td>
+	</tr>
+	<tr>
+		<th>price</th>
+		<td>
+			<input type="number" th:value="${p.price}" name="price"> 
+		</td>
+	</tr>
+	<tr>
+		<th>amount</th>
+		<td>
+			<input type="number" th:value="${p.amount}" name="amount"> 
+		</td>
+	</tr>
+</table>
+<input type="submit" value="수정">
+</form>		
+		
+
+<!-- <div th:if="${session.type == '판매자'}" > -->
+<!-- <form action="/prod/modify" method="post"> -->
+<!-- 	<table border="1"> -->
+<!-- 		<tr><th>num</th><th>name</th><th>price</th><th>amount</th><th>seller</th><th>img</th></tr> -->
+<!-- <!-- 		<tr th:each="p:${list}"> --> 
+<!-- 			<td th:text="${p.num}"><input type="hidden" name="seller" th:value="${p.num}"></td> -->
+<!-- 			<td><input type="text" name="name" th:value="${p.name}"></td> -->
+<!-- 			<td><input type="number" name="price" th:value="${p.price}"></td> -->
+<!-- 			<td><input type="number" name="amount" th:value="${p.amount}"></td> -->
+<!-- <!-- 			<td th:text="${p.amount}"></td> --> 
+<!-- 			<td th:text="${p.seller.id}"><input type="hidden" name="seller" th:value="${p.seller}"></td> -->
+<!-- 			<!-- seller가 Member 타입이라 p.seller만 쓰면 전체 컬럼 다 나오니까 id까지 적어주자 --> 
+<!-- 			<br>  -->
+<!-- 			<input type="submit" value="수정"> -->
+<!-- </form> -->
+<!-- 			<td> -->
+<!-- 				for문 돌면서 @{/prod/read-img(fname=${p.img}) 각각 여기 경로로 요청하면
+<!-- 				바이너리 파일이 반환된다고 한다? --> 
+<!-- 			<img th:src="@{/prod/read-img(fname=${p.img})}" -->
+<!-- 			style="width:100px;height:100px">   -->
+<!-- 			<input type="button" value="이미지 수정" onclick="a()"> -->
+<!-- 			<form name="f" action="/prod/edit-img" method="post" enctype="multipart/form-data"> -->
+<!-- 				새 이미지 : <input type="file" name="f"><br/>multipard f 라서 -->
+<!-- 				<input type="hidden" name="num" th:value="${p.num}"> -->
+<!-- 				<input type="submit" value="수정"> -->
+<!-- 				<input type="submit" value="수정 취소" onclick="b()"> -->
+<!-- 			</form> -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
+<!-- 	</table> -->
+<!-- </div> -->
+
+<!-- <div th:if="${session.type == '구매자'}"> -->
+<!-- </div> -->
+
+
+
+</body>
+</html>

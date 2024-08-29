@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>자료 상세 페이지</h3>
+<form action="/board/edit" method="post">
+<table border="1">
+<tr>
+	<th>num</th>
+	<td><input type="text" name="num" th:value="${dto.num }" readonly></td>
+</tr>
+<tr>
+	<th>writer</th>
+	<td><input type="text" th:value="${dto.writer.id }" readonly></td>
+</tr>
+<tr>
+	<th>wdate</th>
+	<td><input type="text" th:value="${dto.wdate }" readonly></td>
+		<!--  type="date"는 뭐가 잘 안 되는 모양이다 -->
+</tr>
+<tr>
+	<th>title</th>
+	<td><input type="text" name="title" th:value="${dto.title }" readonly></td>
+</tr>
+<tr>
+	<th>자료</th>
+	<td><a th:text="${dto.data }" th:href="@{/data/fname(${dto.data}, num=${dto.num})}"></a><br/>
+	다운수: <span th:text="${dto.cnt}"></span>
+	</td>
+</tr>
+<tr>
+	<th>content</th>
+	<td><textarea rows="5" cols="30" name="content" readonly>[[${dto.content }]]</textarea></td>
+</tr>
+
+</table>
+</form>
+</body>
+</html>

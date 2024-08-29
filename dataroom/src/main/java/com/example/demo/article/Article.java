@@ -1,4 +1,6 @@
-package com.example.demo.product;
+package com.example.demo.article;
+
+import java.util.Date;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -11,43 +13,37 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
-@Entity
-public class Product {
-	@Id
+public class Article {
+	@Id // pk 정의
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int num;
-	private String name;
-	private int price;
-	private int amount;
 	
-	@ManyToOne	
+	@ManyToOne // 다대일
 	@JoinColumn(nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Member seller; // fk로 다른 테이블과 엮여있으니까 타입이 Member
-									//Member테이블과 fk로 엮겠다
+	private Member writer;
 	
-	private String img;  // 상품 이미지 경로
-	
-	
-	/* 
-	 
-	상품(Product) 
-	num(pk 자동할당), 
-	seller(fk. member(id), 
-	img경로(String)
+	private Date wdate;
+	private String title;
+	private String content;
+	private String data;
+	private int cnt;
 
-	 */
-
+	@PrePersist // insert 전 자동호출
+	public void makeDate() {
+		wdate = new Date();
+	}
 }

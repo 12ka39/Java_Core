@@ -46,13 +46,20 @@ public class UpController {
 		// 업로드한 파일은 MultipartFile 타입으로 전송되는데 name은  form 양식의 이름과 같다 <input type="file" name="f">
 		
 		//getOriginalFilename() : 원본 파일명 반환 (확장자 포함)
-		String fname =f.getOriginalFilename(); // 원본 파일이름
-		File newf = new File("C:\\img\\" + fname); // 이 경로에 파일 객체 생성. 이건 서버 경로입니다. 
+		String fname =f.getOriginalFilename(); // 원본 파일이름 (확장자 포함)
+						// f 안에는 원본 파일의 정보가 다 들어가 있으니, 당연히 이름도 가져올 수 있다.
+		File newf = new File("C:\\img\\" + fname);
+		// newf.createNewFile(); 이게 새 파일 생성코드
+		
+		// 파일 객체는 만들어졌으나, 이 경로에 대한 정보만 가진 객체.
+		// 이 경로에 파일 객체 생성. 이건 서버 경로입니다. 
 		//연습하느라 내 컴퓨터에 저장하느라 경로가 이럴 뿐이지, 실제로는 이게 아닙니다. 실제로는 파일이 생성될 서버 경로!
 			//newf: File 객체로, 업로드된 파일을 저장할 서버 내의 경로를 지정합니다
 		
 		try {
 			f.transferTo(newf); // 서버에 파일복사.  업로드 파일을 newf에 복사 
+				// 그리고 경로에 파일이 없으면 파일 생성도 해주고, 데이터도 복사한다.
+				// 서버에 파일이 생성
 			
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
