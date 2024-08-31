@@ -43,24 +43,22 @@ public class MemberController {
 		MemberDto dto = service.getMem(id);
 		map.put("dto", dto);
 		
-		return map;
+		return map; // 반환하는데 없으면 프론트에서 null 뜬다
 	}
 
 	
-	//수정   --- put 전체 수정 ->> 여기 코드 미완성!!!!
-	//포스트맨에서 put으로  주소는 /members  
+	//수정   --- put 전체 수정 --- 근데 여기선 비밀번호만 수정
+	//포스트맨에서 put으로  주소는 /members   방법은 put
 	@PutMapping("")
-	public Map edit(MemberDto m) {
+	public Map edit(MemberDto m) {//id, 새pwd
 		Map map = new HashMap();
 		MemberDto old = service.getMem(m.getId());
 		//pwd만 수정
 		old.setPwd(m.getPwd());
-		
-		MemberDto old = service.getMem(m.getId());
-		map.put("dto", m2); // dto란 이름으로 m2을 map에 저장
-		
+		MemberDto m2 = service.saveMem(old);
+		map.put("dto", m2);
 		return map;
-	}	
+	}
 	
 	
 	//삭제

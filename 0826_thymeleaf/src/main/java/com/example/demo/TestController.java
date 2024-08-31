@@ -25,7 +25,7 @@ public class TestController {
 	
 	
 	// http://localhost:8081/test/test1 로 실행후
-	// 두 번째 hello 링크 클릭 -> 콘솔창(name: hello)과, 인터넷 주소 ?name=hello 확인
+	// 두 번째 hello 링크 클릭 -> 콘솔창(name: hello)과, 인터넷 주소창에서  ?name=hello 확인
 	@GetMapping("/test2")
 	public String test2(String name) {
 		System.out.println("name: " + name);
@@ -49,7 +49,7 @@ public class TestController {
 	}
 	
 	
-	//http://localhost:8081/test/test5 로 접속
+	//http://localhost:8081/test/test5 로 직접 접속
 	@GetMapping("/test5")
 	public String test5(Model m) {
 		ArrayList<String> list = new ArrayList<>();

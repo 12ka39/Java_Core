@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>안녕~</title>
 </head>
+<%-- <c:if test="${session.getAttribute('loginId') == null}"> --%>
 <body>
 <c:if test="${sessionScope.loginId == null }">
 	${msg }<br/>
@@ -22,7 +23,7 @@
 	<hr>
 	<a href="/member/detail?id=${loginId }">(me) 내정보확인...</a><br/><br/> <!-- 이거 과제 -->	
 	
-	<a href="/member/myinfo">(teacher) 내정보확인</a><br/> <!-- 이거 과제 -->	
+	<a href="/member/myinfo" style="color:salmon;">(teacher) 내정보확인</a><br/> <!-- 이거 과제 -->	
 	<a href="/member/out">탈퇴</a><br/>
 	<a href="/board/list" style="color:salmon;">게시판 - Mybatis는 이 부분만 구현했어~~ </a><br/>
 	<hr>

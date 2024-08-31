@@ -16,7 +16,7 @@
 		//받은 응답은 비동기 객체(req)의 responseText 속성에 저장됨
 		req.onload = () => { // 응답이 오면 자동으로 실행될 핸들러
 			let res = document.getElementById("res");
-			res.innerHTML = req.responseText;
+			res.innerHTML = req.responseText;	
 		}
 		
 		//전송할 파라미터 정의

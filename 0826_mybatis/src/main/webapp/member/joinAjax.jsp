@@ -31,7 +31,7 @@
 			받은 데이터를 객체나 배열로 변환하여 뷰 페이지에서 사용
 		*/
 			let obj = JSON.parse(req.responseText); //json을 객체로 바꿔준다
-			//db로 검색하고 Member 객체에 담긴 회원 정보
+			//db로 검색한 뒤 Member 객체에 담긴 회원 정보
 			if(obj.flag){ // flag 값이 true면
 				msg = '사용가능한 아이디';
 			}

@@ -24,7 +24,6 @@ public class MemController {
 	@GetMapping("/join")
 	public String joinForm() {
 		return "member/joinAjax";
-		//return "member/join"; 이었다가 바꾼 듯?
 	}
 	
 	//회원가입
@@ -35,31 +34,13 @@ public class MemController {
 	}
 	
 	
-	//아이디 중복체크(팝업창 띄우는 거)
-	@PostMapping("/idcheck")
-	public String idcheck(String id, Model model) {
-		Member m = service.getMem(id);
-		String msg = "중복된 아이디";
-		String resultid = "";
-		boolean flag = false;
-		if(m == null) {
-			msg = "사용 가능한 아이디";
-			resultid = id;
-			flag = true;
-		}
-		model.addAttribute("resultid", resultid);
-		model.addAttribute("msg", msg);
-		model.addAttribute("flag", flag);
-		return "/member/idcheck";
-	}
-	
 	//ajax로 id 중복체크
 	// http://localhost:8081/member/idcheckAjax
 	@ResponseBody 
 	//(메서드가 반환하는 객체를 JSON, XML 등으로 자동 변환하여 HTTP 응답의 본문으로 전달.)
 	
 	@GetMapping("/idcheckAjax")
-	public  Map idcheckAjax(String id) {
+	public  Map idcheckAjax(String id) { //Map 키:값
 		//Model, ModelAndView는 jsp파일에 데이터 보내는 거라서 
 		//페이지 없는 비동기 방식에는 쓸 수 없다
 		Map map = new HashMap();
@@ -93,9 +74,9 @@ public class MemController {
 	
 	//로그인
 	@PostMapping("/login")
-	public String login(Member m, HttpSession session, Model model) {
-		Member m2 = service.getMem(m.getId());
-		if(m2!=null && m2.getPwd().equals(m.getPwd())) { //id, pw가 일치하면
+	public String login(Member m, HttpSession session, Model model) { //m은 사용자가 입력한 id와 pw
+		Member m2 = service.getMem(m.getId()); // id가 있는지 체크
+		if(m2!=null && m2.getPwd().equals(m.getPwd())) { // pw가 일치하면
 			session.setAttribute("loginId", m2.getId());
 			session.setAttribute("type", m2.getType()); // 세션을 수정해야 회원 타입이 바뀐다
 		}else {
@@ -124,9 +105,9 @@ public class MemController {
 	
 	@PostMapping("/edit")
 	public String edit(Member m, HttpSession session) {
-		service.editMem(m);
-		Member m2 = service.getMem(m.getId());
-		session.setAttribute("type", m2.getType()); 
+		service.editMem(m); // 일단 수정을 하고
+		Member m2 = service.getMem(m.getId()); // 아이디 가져온 뒤
+		session.setAttribute("type", m2.getType()); // 타입 다시 세션에 저장
 		// 세션에 구매/판매자 타입을 올려놨었는데, 정보 수정후 바뀔 수 있으니까 
 		//다시 세션에 저장
 		return "redirect:/index.jsp"; // 이렇게 해야 계속 수정화면에서 고칠 수 없게 됨
@@ -134,7 +115,7 @@ public class MemController {
 	
 	
 	
-	//회원 탈퇴
+	//회원 탈퇴 -- 이거 Mybatis에서 구현 안했다
 	@GetMapping("/out")
 	public String out(HttpSession session) { // 로그인한 사람 id 가져오려고
 		String loginId = (String) session.getAttribute("loginId");
@@ -143,32 +124,6 @@ public class MemController {
 	}
 	//forward: 서버 내 이동. url 안 바뀜. 
 	//redirect: 새 요청 시킴. (= 새 리퀘스트 객체)
-	
-	
-	
-	
-	
-	//내 정보 확인페이지로 가기 -------- me 추후 수정
-	@GetMapping("/detail")
-	public String detailForm(Member m, HttpSession session, Model model) {
-		Member m2 = service.getMem(m.getId());
-		System.out.println(m.getId());
-		model.addAttribute("member", m2);
-		System.out.println(model);
-		
-		return "member/detail";
-	}
-	
-	
-	
-	//내 정보 수정 ------------- me 추후 수정
-	@PostMapping("/detail")
-	public String detail(Member m , Model model) {
-		service.editMem(m);
-		model.addAttribute("member", m);
-		return "member/detail";
-	}
-	
 	
 }
 	

@@ -1,8 +1,6 @@
 package com.example.demo.board;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +46,7 @@ public class BoardController {
 		Map map = new HashMap();
 		map.put("num", b.getNum());
 		map.put("writer", b.getWriter());
-		map.put("wdate", b.getWdate()+""); // json은 날짜타입 boolean 숫자 -> "" 해줘야 파싱 된다
+		map.put("wdate", b.getWdate()+""); // json은 날짜타입, boolean, 숫자 모두 -> "" 해줘야 파싱 된다
 		map.put("title", b.getTitle());
 		map.put("content", b.getContent());
 		return map;
@@ -58,9 +56,9 @@ public class BoardController {
 		 *{
 		    "num": 2,
 		    "writer": "2",
-		    "title": "됐다!",
+		    "title": "제목",
 		    "wdate": "2024-08-23",
-		    "content": "신난다"
+		    "content": "내용입니다~"
 		}
 		 */
 		
@@ -76,13 +74,7 @@ public class BoardController {
 //		res.addCookie(c1);
 		
 	}
-	
-	//오늘 읽은 글목록 List 
-//	@GetMapping("/todaylist")
-//	public void todaylist(HttpServletRequest req) {
-//		Cookie[] list = req.getCookies(); // string
-//		
-//	}
+
 	
 	@PostMapping("/edit")
 	public String edit(Board b) {
@@ -112,7 +104,4 @@ public class BoardController {
 		m.addAttribute("list", service.getByTitle(title));
 		return "board/list";
 	}
-	
-
-	
 }

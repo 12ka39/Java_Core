@@ -20,7 +20,10 @@
 	<a href="/member/logout">로그아웃</a><br/>
 	<a href="/member/out">탈퇴</a><br/>
 	<a href="/board/list">글목록</a><br/>
-
 </div>
+	
+<!-- Thymeleaf는 session 객체의 속성에 접근할 때 자동으로 getAttribute("loginId") 메서드를 호출하여 값을 가져옵니다. 
+	즉, session.loginId는 session.getAttribute("loginId")와 동일하게 처리됩니다. -->
+
 </body>
 </html>

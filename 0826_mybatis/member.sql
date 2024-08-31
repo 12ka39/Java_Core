@@ -10,7 +10,7 @@ type varchar(20)
 
 --on delete cascade, 부모 데이터 삭제시 자식 데이터도 삭제
 
-create table board(
+create table boards(
 num int primary key auto_increment,
 writer varchar(20) references member(id) on delete cascade,
 wdate date,

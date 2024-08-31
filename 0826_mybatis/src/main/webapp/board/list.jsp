@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	const a = (num) => {
+	const mouseover = (num) => { //이건 마우스 
 		//비동기 요청 객체 생성
 		let req = new XMLHttpRequest(); 
 		
@@ -33,15 +33,20 @@
 		//요청 전송
 		req.send();
 	}
-	const b = () => {
+	
+	
+	const mouseout = () => {
 		let res = document.getElementById("res");
 		res.innerHTML = '';
 	}
-	const c = () => {
+	
+	
+	const search = () => {
 		let type = document.getElementById("gettype").value;
 		let val = document.getElementById("search").value;
 		
 		let url = "/board/getby"+type+"?"+type+"="+val;
+				// /board/getbywriter?writer=2
 		alert(url);
 		location.href = url;
 	}
@@ -50,20 +55,22 @@
 <body>
 <h3>게시판</h3>
 <span id="res" style="position:absolute;top:100px;left:300px"></span>
-<a href="">오늘 읽은 글목록</a><br/>
+<a href="">오늘 읽은 글목록 (구현x)</a><br/>
 <a href="/board/add">글작성</a><br/>
+
 <select id="gettype">
 	<option value="writer">작성자</option>
 	<option value="title">제목</option>
 </select>
 <input type="text" id="search">
-<input type="button" value="검색" onclick="c()">
+
+<input type="button" value="검색" onclick="search()">
 <table border="1">
 	<tr><th>num</th><th>title</th><th>writer</th></tr>
 	<c:forEach var="b" items="${list }">
 		<tr>
 			<td><a href="/board/detail?num=${b.num }">${b.num }</a></td>
-			<td><span onmouseover="a(${b.num })" onmouseout="b()">${b.title }</span></td>
+			<td><span onmouseover="mouseover(${b.num })" onmouseout="mouseout()">${b.title }</span></td>
 			<td>${b.writer }</td>
 		</tr>
 	</c:forEach>

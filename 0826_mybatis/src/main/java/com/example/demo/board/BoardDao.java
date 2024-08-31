@@ -12,32 +12,32 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface BoardDao {
 	
-	@Insert("insert into board(writer,wdate,title,content) values(#{writer},sysdate(), #{title},#{content})")
+	@Insert("insert into boards(writer,wdate,title,content) values(#{writer},sysdate(), #{title},#{content})")
 	public void insert(Board b);
 	
 	
-	@Select("select * from board where num=#{num}")
-	public Board select(@Param("num") int num)
-	;
+	@Select("select * from boards where num=#{num}")
+	public Board select(@Param("num") int num);
 
-	@Select("select * from board order by num")
+	//전체 목록
+	@Select("select * from boards order by num")
 	public ArrayList<Board> selectAll();
 
 	
 	//제목으로 검색(결과 여러줄)	
-	@Select("select * from board where title like #{title} order by num")
+	@Select("select * from boards where title like #{title} order by num")
 	public ArrayList<Board> selectByTitle(@Param("title") String title);
 
 	
 	//작가명으로 검색(결과 여러줄)
-	@Select("select * from board where writer=#{writer} order by num")
+	@Select("select * from boards where writer=#{writer} order by num")
 	public ArrayList<Board> selectByWriter(String writer);
 	
 
-	@Update("update board set title=#{title}, content=#{content} where num=#{num}")
+	@Update("update boards set title=#{title}, content=#{content} where num=#{num}")
 	public void update(Board b);
 	
 
-	@Delete("delete from board where num=#{num}")
+	@Delete("delete from boards where num=#{num}")
 	public void delete(@Param("num") int num);
 }
