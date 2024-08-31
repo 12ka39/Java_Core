@@ -25,8 +25,8 @@ public class ProductDto {
 	private Member seller;
 	private String img;
 	
-	private MultipartFile f; // 폼에서 전송한 이미지 저장할 변수
-	// private MultipartFile[] f;  여러 개의 파일을 올릴 때
+	private MultipartFile f; // 폼에서 전송한 이미지 데이터 저장할 변수
+	// private MultipartFile[] f;  여러 개의 파일을 올릴 경우 배열로.
 	
 	// 이건 Product (@Entity클래스) 에는 없다. Product는 이미지 경로(img)만 저장하고,
 	// 실제 이미지 데이터는 Dto인 MultipartFile f에 저장

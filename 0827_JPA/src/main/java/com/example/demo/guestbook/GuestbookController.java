@@ -31,7 +31,6 @@ public class GuestbookController {
 		return "redirect:/guestbook/list";
 	}
 	
-	
 	@GetMapping("/getbywriter")
 	public String getbywriter(String writer, Model m) {
 		m.addAttribute("list", service.getByWriter(writer));

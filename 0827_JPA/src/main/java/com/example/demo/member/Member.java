@@ -1,6 +1,5 @@
 package com.example.demo.member;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -22,7 +21,7 @@ public class Member {
 	private String id; 
 	
 	//@Column(name="password", nullable=false)
-	// 컬럼명 지정,                             null허용 X
+	// 컬럼명 지정,   null허용여부                        null허용 X
 	private String pwd; 
 	private String name; 
 	private String email; 

@@ -32,13 +32,14 @@ public class MemService {
 	
 	//회원 1명 조회
 	public MemberDto getMem(String id) {
-		Member entity = dao.findById(id).orElse(null);
+		Member entity = dao.findById(id).orElse(null); // .orElse(null) 이거 안 쓰면 오류남
 		if(entity !=null) {
 			return new MemberDto(entity.getId(), entity.getPwd(), entity.getName(), entity.getEmail(), entity.getType());
 		}
 		return null;
 	}
 
+	//회원 탈퇴
 	public void delMem(String id) {
 		dao.deleteById(id);
 	}

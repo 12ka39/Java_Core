@@ -41,17 +41,17 @@ public class UpController {
 	// 그런데 아직 파일이 만들어진 건 아님!
 	// 하지만 데이터(f) 는 있으니까 빈 파일객체 하나 만들고 f복사한 걸 파일 객체에 집어넣는다. 
 	@PostMapping("/upload")
-	public String upload(MultipartFile f, String title) {
+	public String upload(MultipartFile f, String title) { // 파일 업로드 form에 title 입력하게 해서 String title도 있는 거
 		// MultipartFile : 파일 업로드 api 클래스
 		// 업로드한 파일은 MultipartFile 타입으로 전송되는데 name은  form 양식의 이름과 같다 <input type="file" name="f">
 		
 		//getOriginalFilename() : 원본 파일명 반환 (확장자 포함)
 		String fname =f.getOriginalFilename(); // 원본 파일이름 (확장자 포함)
 						// f 안에는 원본 파일의 정보가 다 들어가 있으니, 당연히 이름도 가져올 수 있다.
-		File newf = new File("C:\\img\\" + fname);
+		File newf = new File("C:\\img\\" + fname); // 이 경로는 실무에서는 이미지 올릴 서버 경로
 		// newf.createNewFile(); 이게 새 파일 생성코드
 		
-		// 파일 객체는 만들어졌으나, 이 경로에 대한 정보만 가진 객체.
+		// newf라는 파일 객체는 만들어졌으나, 이 객체는 파일 경로에 대한 정보만 가진 객체.(이미지 데이터 없음!)
 		// 이 경로에 파일 객체 생성. 이건 서버 경로입니다. 
 		//연습하느라 내 컴퓨터에 저장하느라 경로가 이럴 뿐이지, 실제로는 이게 아닙니다. 실제로는 파일이 생성될 서버 경로!
 			//newf: File 객체로, 업로드된 파일을 저장할 서버 내의 경로를 지정합니다
@@ -103,6 +103,8 @@ public class UpController {
 			// Files.probeContentType(filePath)
 			// 이 메서드는 filePath에 있는 파일의 MIME 타입을 추론하여 반환합니다. 
 			// 예를 들어, example.jpg 파일의 MIME 타입은 "image/jpeg"가 됩니다.
+			
+			//전송하는 데이터의 마임 타입 설정
 			header.add("Content-Type", Files.probeContentType(f.toPath()));
 			result = new ResponseEntity<byte[]>(
 							FileCopyUtils.copyToByteArray(f), header, HttpStatus.OK

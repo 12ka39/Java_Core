@@ -51,7 +51,7 @@ public class MemController {
 		return "index";
 	}
 
-	@ResponseBody
+	@ResponseBody //비통기 요청
 	@GetMapping("/idcheckAjax")
 	public Map idcheckAjax(String id) {
 		Map map = new HashMap();

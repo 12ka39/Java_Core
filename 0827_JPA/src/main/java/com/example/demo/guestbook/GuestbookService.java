@@ -49,9 +49,9 @@ public class GuestbookService {
 	
 	
 	//사용자 정의
-	//service에 getByWriter() 구현
+	//service에 getByWriter() 구현 
 	public ArrayList<GuestbookDto> getByWriter(String writer){
-		ArrayList <Guestbook> l = dao.findByWriter(writer); // 엔터티 arrayList 반환
+		ArrayList <Guestbook> l = dao.findByWriter(writer); // 엔터티(Guestbook) arrayList 반환
 		ArrayList<GuestbookDto> list = new ArrayList<>(); 
 		for(Guestbook entity : l) { // entity 하나씩 꺼내서 dto로 변환 후 list에 추가
 			list.add(new GuestbookDto(entity.getNum(), entity.getWriter() , entity.getWdate(), entity.getPwd(), entity.getContent()));
