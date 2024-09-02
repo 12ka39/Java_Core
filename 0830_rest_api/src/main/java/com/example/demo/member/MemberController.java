@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
  // 컨트롤러         -> 뷰페이지 전달
 //  레스트 컨트롤러 -> json으로 전달 ----- 리턴값이 Map이고, Map에 JSON을 담아준다
 
-@CrossOrigin(origins = "*") // 요청받을 ip주소 / * 모든 ip에서 요청 받겠다
+@CrossOrigin(origins = "*") // 요청받을 ip주소 / * 모든 ip에서 요청 받겠다 - 보안상 불필요한 접근을 막으려고
 @RequestMapping("/members")
 public class MemberController {
 	@Autowired
 	private MemService service;
 	
-	//추가
+	//추가 POST
 	@PostMapping("")
 	public Map add(MemberDto m) {
 		Map map = new HashMap();
@@ -35,9 +35,9 @@ public class MemberController {
 		return map;
 	}
 	
-	//pk로 검색
+	//(PK로) 검색 GET
 	@GetMapping("/{id}") //   /members/aaa
-				// {id} 는  path variable  
+				//        /{id} 는  path variable  
 	public Map get(@PathVariable("id") String id) { // {id} 값이 id란 이름으로 String id에 저장하는 코드
 		Map map = new HashMap();
 		MemberDto dto = service.getMem(id);
@@ -47,8 +47,8 @@ public class MemberController {
 	}
 
 	
-	//수정   --- put 전체 수정 --- 근데 여기선 비밀번호만 수정
-	//포스트맨에서 put으로  주소는 /members   방법은 put
+	//수정   --- PUT 전체 수정 --- 근데 여기선 비밀번호만 수정
+	//포스트맨에서 put으로 요청방식 바꿔주고  주소는 /members  
 	@PutMapping("")
 	public Map edit(MemberDto m) {//id, 새pwd
 		Map map = new HashMap();
@@ -66,7 +66,7 @@ public class MemberController {
 	public Map delete(@PathVariable("id") String id) { // {id} 값이 id란 이름으로 String id에 저장하는 코드
 		Map map = new HashMap();
 		boolean flag = true;
-		try {
+		try { // try-catch 하라는 경고 안 떠도 처리결과 알려주는 코드 짜면 -> 프론트가 확인할 수 있다
 			service.getMem(id);
 		} catch (Exception e) {
 			System.out.println(e);
