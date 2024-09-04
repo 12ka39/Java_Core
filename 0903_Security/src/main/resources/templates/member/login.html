@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- 
+
+여기서 경로랑 name은 그냥 준 게 아니다
+SecurityConfiguration 설정파일에서 정의한 
+
+.loginProcessingUrl("/login") //로그인 처리 요청 url (로그인 처리되는 url)
+					.usernameParameter("id")//id 입력양식의 이름 (username의 파라미터 이름을 id로 하겠다)
+					.passwordParameter("pwd")
+					
+이 설정에 맞춰 경로랑 name 준 거다
+ -->
+
+<h3>로그인폼</h3>
+<form action="/login" method="post">
+	id: <input type="text" name="id"><br/>
+	pwd: <input type="password" name="pwd"><br/>
+	<input type="submit" value="로그인">
+	
+
+</form>
+</body>
+</html>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -67,11 +68,11 @@ public class MemController {
 	
 	//로그인
 	@GetMapping("/login")
-	public Map login(String id, String pwd) {
+	public Map login(MemberDto dto) { // @RequestParam(value="name")
 		Map map = new HashMap();
 		boolean flag = false;
-		MemberDto m = service.getMem(id);
-		if(m!=null && m.getPwd().equals(pwd)) {
+		MemberDto m = service.getMem(dto.getId());
+		if(m!=null && m.getPwd().equals(dto.getPwd())) {
 			flag = true;
 			map.put("loginId", m.getId());
 			map.put("type", m.getType());
