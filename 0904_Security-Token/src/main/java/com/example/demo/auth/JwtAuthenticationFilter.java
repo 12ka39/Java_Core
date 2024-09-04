@@ -14,11 +14,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 // 필터 클래스 추가
-// ~~요청이 올 때마다~~ 요청 헤더에서 토큰을 꺼내 유효성을 체크
+// ~~요청이 올 때마다~~ 요청 헤더에서 토큰을 꺼내 유효성 체크
 
-public class JwtAuthenticationFiler extends GenericFilterBean {
+public class JwtAuthenticationFilter extends GenericFilterBean {
 
-	//토큰객체 필요
 	private final TokenProvider provider;
 	
 	

@@ -93,7 +93,7 @@ public class TokenProvider {
 		
 		//요청 헤더에서 토큰을 꺼내서 반환
 		public String resolveToken(HttpServletRequest req) {
-			return req.getHeader("token"); 
+			return req.getHeader("token");  // 헤더에 token이란 이름으로 토큰 저장
 		}
 		
 		
@@ -118,6 +118,5 @@ public class TokenProvider {
 										user, " ", user.getAuthorities());
 					
 		}
-		
 		
 }
