@@ -1,8 +1,10 @@
 package com.example.demo.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,6 +56,7 @@ public class UsersController {
 	}
 	
 	
+	// 인증 에러
 	@RequestMapping("/autherror")
 	public String error() {
 		return "error";
@@ -77,8 +80,15 @@ public class UsersController {
 		//SecurityContextHolder 
 		SecurityContextHolder.getContext().setAuthentication(null); // 인증 날림 - 로그 아웃
 		return "redirect:/";
-		
-		
 	}
+
 	
+	// 내정보 확인. 로그인 하려면 id확인해야 하는데, id가 authentication 객체에 들어있음
+	@GetMapping("/auth/info")
+	public String info(Model m) {
+		Authentication a = SecurityContextHolder.getContext().getAuthentication(); //Authentication 객체를 만들어 정보를 담는다.
+		String loginId = a.getName(); //인증 유저 네임 (객체 안에 있는 정보 가져옴)
+		m.addAttribute("user", service.get(loginId));
+		return "member/info";
+	}
 }
