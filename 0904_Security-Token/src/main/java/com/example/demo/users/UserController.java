@@ -51,20 +51,17 @@ public class UserController {
 	}
 	
 	
-	
 	//로그인 (토큰 인증)
 	@PostMapping("/login")
 	public Map login(String id, String pwd) {
-		UsernamePasswordAuthenticationToken authtoken =
-				new UsernamePasswordAuthenticationToken(id, pwd); // 토큰 객체 생성
-		
+		UsernamePasswordAuthenticationToken authtoken = 
+				new UsernamePasswordAuthenticationToken(id, pwd);  // 토큰 객체 생성
 		Authentication auth = 
 				abuilder.getObject().authenticate(authtoken);
-		boolean flag = auth.isAuthenticated(); // 인증 결과
-		System.out.println("인증결과: " + flag);
-		
+		boolean flag = auth.isAuthenticated();//인증결과
+		System.out.println("인증결과:" + flag);
 		Map map = new HashMap();
-		if(flag) { // 정상 인증
+		if(flag) {//정상 인증
 			String token = provider.getToken(service.get(id));
 			map.put("token", token);
 		}
@@ -73,7 +70,7 @@ public class UserController {
 	}
 	
 	
-	
+
 	@GetMapping("/auth/meminfo")
 	public Map info() {
 		Map map = new HashMap();

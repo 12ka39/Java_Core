@@ -12,14 +12,15 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
 // 필터 클래스 추가
 // ~~요청이 올 때마다~~ 요청 헤더에서 토큰을 꺼내 유효성 체크
 
+@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
 	private final TokenProvider provider;
-	
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
