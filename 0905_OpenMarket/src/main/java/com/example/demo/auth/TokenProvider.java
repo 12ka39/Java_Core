@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.users.UsersDto;
 
+//JJWT 라이브러리 의존성 추가 문제 - 라이브러리 의존성 추가 필요
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

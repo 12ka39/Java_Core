@@ -42,7 +42,7 @@ public class Article {
 	
 	private String title;
 	private String content;
-	private String data;
+	private String data; // 이미지 경로
 	private int cnt;    // 다운로드 수
 	
 	@PrePersist  //insert 되기 전 자동 호출

@@ -28,6 +28,8 @@ public class ImgboardController {
 	@Autowired
 	private ImgboardService service;
 	
+	//애플리케이션의 설정 파일에 있는 spring.servlet.multipart.location 속성의 값을 읽어서 path 변수에 주입
+	//보통 파일 업로드 관련 설정에서 사용되며, 업로드된 파일들이 임시로 저장될 디렉터리 경로를 지정합니다.
 	@Value("${spring.servlet.multipart.location}")
 	private String path;
 	
@@ -43,7 +45,7 @@ public class ImgboardController {
 		try {
 			dto.getF().transferTo(newf);
 			dto.setImg(fname);
-			Authentication a = 
+			Authentication a =  //인증
 					SecurityContextHolder.getContext().getAuthentication();
 			Users u = new Users(a.getName(), "", "");
 			dto.setWriter(u);
@@ -115,9 +117,10 @@ public class ImgboardController {
 	*/
 	
 	
-	
-	@GetMapping("/read-img/{fname}") // 요청줄 때 확장자 명까지 제대로 줘야 postman에서 이미지 불러온다
+	//이미지 가져오기. postman에서 확인
 	// http://localhost:8081/read-img/스크린샷 2024-08-16 204511.png
+	@GetMapping("/read-img/{fname}") // 요청줄 때 확장자 명까지 제대로 줘야 postman에서 이미지 불러온다
+	
 	public ResponseEntity<byte[]> read_img(
 			@PathVariable("fname") String fname) {
 		ResponseEntity<byte[]> result = null;

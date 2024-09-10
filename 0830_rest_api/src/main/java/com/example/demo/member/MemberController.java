@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
  // 컨트롤러         -> 뷰페이지 전달
 //  레스트 컨트롤러 -> json으로 전달 ----- 리턴값이 Map이고, Map에 JSON을 담아준다
 
-@CrossOrigin(origins = "*") // 요청받을 ip주소 / * 모든 ip에서 요청 받겠다 - 보안상 불필요한 접근을 막으려고
+@CrossOrigin(origins = "*") // 요청받을 ip주소 / * 모든 ip에서 요청 받겠다 - 보안상 불필요한 접근을 막으려고 * 대신 다른 주소 적음
 @RequestMapping("/members")
 public class MemberController {
 	@Autowired
 	private MemService service;
 	
-	//추가 POST
+	//추가 (POST)
 	@PostMapping("")
 	public Map add(MemberDto m) {
 		Map map = new HashMap();
@@ -37,7 +37,10 @@ public class MemberController {
 	
 	//(PK로) 검색 GET
 	@GetMapping("/{id}") //   /members/aaa
-				//        /{id} 는  path variable  
+				//        /{id} 는  path variable  -- 동적 처리를 위해
+	
+	// postman에서 요청시, id가 11이면 ---->  http://localhost:8081/members/11  이렇게 요청하면 됨
+	
 	public Map get(@PathVariable("id") String id) { // {id} 값이 id란 이름으로 String id에 저장하는 코드
 		Map map = new HashMap();
 		MemberDto dto = service.getMem(id);
@@ -47,14 +50,14 @@ public class MemberController {
 	}
 
 	
-	//수정   --- PUT 전체 수정 --- 근데 여기선 비밀번호만 수정
+	//수정   --- PUT 전체 수정 --- 근데 여기선 비밀번호만 수정하도록 짰다
 	//포스트맨에서 put으로 요청방식 바꿔주고  주소는 /members  
 	@PutMapping("")
 	public Map edit(MemberDto m) {//id, 새pwd
 		Map map = new HashMap();
 		MemberDto old = service.getMem(m.getId());
 		//pwd만 수정
-		old.setPwd(m.getPwd());
+		old.setPwd(m.getPwd()); // 방금 입력받은 pwd를 세팅
 		MemberDto m2 = service.saveMem(old);
 		map.put("dto", m2);
 		return map;
