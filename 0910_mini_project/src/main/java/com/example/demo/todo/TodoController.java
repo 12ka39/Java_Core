@@ -48,8 +48,6 @@ public class TodoController {
 	}
 	
 	
-	
-	
 	//번호로 검색
 	@GetMapping("/{num}")
 	public Map get(@PathVariable("num") int num) {
