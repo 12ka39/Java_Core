@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>학생 목록</title>
+</head>
+<body>
+<a href="/add">학생 추가</a>
+<br>
+학생 목록
+ <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Grade</th>
+        </tr>
+        <tr th:each="b : ${list}">
+            <td th:text="${b.id}"></td>
+            <td th:text="${b.name}"></td>
+            <td th:text="${b.grade}"></td>
+        </tr>
+    </table>
+</body>
+</html>
